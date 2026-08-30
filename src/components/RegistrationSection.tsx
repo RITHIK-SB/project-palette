@@ -1,5 +1,7 @@
 import { TriangleAlert, ClipboardCheck, Lock, ChevronDown } from "lucide-react";
+import { useState } from "react";
 import type { ReactNode } from "react";
+
 
 function FieldLabel({ children }: { children: ReactNode }) {
   return (
@@ -13,6 +15,9 @@ const inputClass =
   "w-full rounded-md border-2 border-input bg-card px-4 py-3 font-sans text-base text-foreground placeholder:text-on-surface-variant/60 outline-none transition-colors focus:border-secondary";
 
 export function RegistrationSection() {
+  const [buildingType, setBuildingType] = useState("");
+  const isOther = buildingType === "other";
+
   return (
     <section id="register" className="bg-surface-container">
       <div className="mx-auto grid max-w-[1280px] items-start gap-12 px-4 py-16 md:grid-cols-2 md:px-12 md:py-20">
@@ -78,20 +83,31 @@ export function RegistrationSection() {
               <FieldLabel>Type of Building</FieldLabel>
               <div className="relative">
                 <select
-                  defaultValue=""
+                  value={buildingType}
+                  onChange={(e) => setBuildingType(e.target.value)}
                   className={`${inputClass} appearance-none pr-10 text-on-surface-variant`}
                 >
                   <option value="" disabled>
                     Select facility type
                   </option>
+                  <option value="institutions">Institutions</option>
+                  <option value="hospitals">Hospitals</option>
+                  <option value="industries">Industries</option>
+                  <option value="warehouses">Warehouses</option>
                   <option value="commercial">Commercial Complex</option>
-                  <option value="industrial">Industrial / Warehouse</option>
-                  <option value="residential">Residential High-Rise</option>
-                  <option value="hospital">Hospital / Healthcare</option>
-                  <option value="hospitality">Hotel / Hospitality</option>
+                  <option value="high-rise-residential">High-rise Residence Buildings</option>
+                  <option value="other">Other</option>
                 </select>
                 <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-on-surface-variant" />
               </div>
+              {isOther && (
+                <input
+                  type="text"
+                  className={`${inputClass} mt-4`}
+                  placeholder="Please specify your building type"
+                  aria-label="Specific building type"
+                />
+              )}
             </div>
 
             <button
@@ -112,3 +128,4 @@ export function RegistrationSection() {
     </section>
   );
 }
+
