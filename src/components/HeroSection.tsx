@@ -7,7 +7,7 @@ export function HeroSection() {
       <div className="mx-auto grid max-w-[1280px] items-center gap-10 px-4 py-16 md:grid-cols-2 md:gap-12 md:px-12 md:py-20">
         <div>
           <h1 className="text-balance font-sans text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground md:text-5xl">
-            Secure Your Facility.
+            <span className="text-primary">Secure Your Facility.</span>
             <br />
             <span className="text-foreground">FREE FIRE SAFTEY HEALTH CHECK UP</span>
           </h1>
