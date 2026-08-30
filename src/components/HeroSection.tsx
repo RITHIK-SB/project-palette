@@ -19,7 +19,7 @@ export function HeroSection() {
             href="#register"
             className="mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Claim free inspection
+            Claim Free Inspection
             <ArrowRight className="h-5 w-5" />
           </a>
         </div>

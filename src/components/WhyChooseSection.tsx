@@ -34,7 +34,7 @@ export function WhyChooseSection() {
         <p className="mt-4 max-w-2xl text-pretty font-sans text-base leading-relaxed text-on-surface-variant">
           Our preventive maintenance contracts guarantee your fire protection systems operate
           precisely when needed, mitigating risk and ensuring total compliance with national safety
-          standards.
+          standards & NFPA standards.
         </p>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
