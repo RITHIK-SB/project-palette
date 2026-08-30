@@ -18,17 +18,13 @@ export function RegistrationSection() {
       <div className="mx-auto grid max-w-[1280px] items-start gap-12 px-4 py-16 md:grid-cols-2 md:px-12 md:py-20">
         {/* Left copy */}
         <div className="md:pt-8">
-          <p className="font-label text-sm font-bold uppercase tracking-[0.08em] text-primary">
-            Expo Registration
-          </p>
-          <h2 className="mt-3 text-balance font-sans text-3xl font-bold tracking-tight text-foreground md:text-[32px]">
+          <h2 className="text-balance font-sans text-3xl font-bold tracking-tight text-foreground md:text-[32px]">
             Activate Your Free Maintenance Assessment
           </h2>
           <p className="mt-5 max-w-md text-pretty font-sans text-base leading-relaxed text-on-surface-variant">
-            Complete the registration form to lock in your exclusive Expo 2026 offer. Our
-            engineering team will contact you within 24 hours to schedule the initial facility
-            baseline assessment. This structural data is crucial for configuring your customized AMC
-            plan.
+            Complete the registration form to lock in your exclusive Synergy 2026 Expo offer. Our
+            engineering team will contact you at the earliest to schedule the initial baseline
+            assessment.
           </p>
 
           <div className="mt-8 max-w-md border border-border border-l-4 border-l-alert-amber bg-card p-5">
