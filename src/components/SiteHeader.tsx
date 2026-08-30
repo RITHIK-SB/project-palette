@@ -45,7 +45,7 @@ export function SiteHeader() {
           />
           <span className="flex flex-col leading-tight">
             <span className="font-sans text-base font-extrabold tracking-tight text-primary md:text-lg">
-              MAHA BINU FIREFIGHTERS PVT.LTD.,
+              MAHA BINU FIRE FIGHTERS PVT LTD
             </span>
             <span className="font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-foreground/60 md:text-xs">
               Your trusted fire safety partner
