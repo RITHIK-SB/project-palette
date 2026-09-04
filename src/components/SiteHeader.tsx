@@ -8,7 +8,7 @@ const navItems = [
 ];
 
 export function SiteHeader() {
-  const [active, setActive] = useState("plans");
+  const [active, setActive] = useState("about");
 
   useEffect(() => {
     const sections = navItems
