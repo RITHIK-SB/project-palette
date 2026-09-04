@@ -29,7 +29,7 @@ export function WhyChooseSection() {
     <section id="about" className="bg-surface">
       <div className="mx-auto max-w-[1280px] px-4 pt-16 md:px-12 md:pt-20">
         <h2 className="text-balance font-sans text-3xl font-bold tracking-tight text-foreground md:text-[32px]">
-          Why choose MAHA BINU&apos;S AMC?
+          Why choose MAHA BINU&apos;S INSPECTION?
         </h2>
         <p className="mt-4 max-w-2xl text-pretty font-sans text-base leading-relaxed text-on-surface-variant">
           Our preventive maintenance contracts guarantee your fire protection systems operate
