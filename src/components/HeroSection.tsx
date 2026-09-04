@@ -9,7 +9,7 @@ export function HeroSection() {
           <h1 className="text-balance font-sans text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground md:text-5xl">
             <span className="text-primary">Secure Your Facility.</span>
             <br />
-            <span className="text-foreground">FREE FIRE SAFTEY HEALTH CHECK UP</span>
+            <span className="text-foreground">FREE FIRE SAFTEY INSPECTION</span>
           </h1>
           <p className="mt-6 max-w-md text-pretty font-sans text-lg leading-relaxed text-on-surface-variant">
             Our certified technicians will visit your facility to perform a thorough, complimentary
