@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import logoAsset from "@/assets/maha-binu-logo.png.asset.json";
 
 const navItems = [
-  { id: "plans", label: "AMC Plans", href: "#plans" },
   { id: "about", label: "About", href: "#about" },
 ];
 
