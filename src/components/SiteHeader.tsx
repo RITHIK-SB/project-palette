@@ -28,24 +28,15 @@ export function SiteHeader() {
         </a>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
-          {navItems.map((item) => {
-            const isActive = active === item.id;
-            return (
-              <a
-                key={item.id}
-                href={item.href}
-                onClick={() => setActive(item.id)}
-                aria-current={isActive ? "page" : undefined}
-                className={
-                  isActive
-                    ? "border-b-2 border-primary pb-0.5 font-sans text-[15px] font-semibold text-primary"
-                    : "border-b-2 border-transparent pb-0.5 font-sans text-[15px] font-medium text-foreground/80 transition-colors hover:text-foreground"
-                }
-              >
-                {item.label}
-              </a>
-            );
-          })}
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={item.href}
+              className="border-b-2 border-transparent pb-0.5 font-sans text-[15px] font-medium text-foreground/80 transition-colors hover:text-primary"
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
 
         <a
