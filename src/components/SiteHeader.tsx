@@ -51,7 +51,9 @@ export function SiteHeader() {
         </nav>
 
         <a
-          href="#register"
+          href="https://www.mahabinufirefighters.com"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center rounded-md bg-secondary px-5 py-2.5 font-sans text-sm font-bold text-secondary-foreground transition-colors hover:bg-secondary/90"
         >
           Contact Us
