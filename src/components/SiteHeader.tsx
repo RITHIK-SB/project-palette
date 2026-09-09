@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import logoAsset from "@/assets/maha-binu-logo.png.asset.json";
 
 const navItems = [
@@ -8,7 +7,6 @@ const navItems = [
 ];
 
 export function SiteHeader() {
-  const [active, setActive] = useState("about");
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background">
