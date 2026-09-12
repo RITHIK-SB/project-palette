@@ -2,18 +2,18 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as useNavigate, f as Outlet, g as Link, l as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as useAuth } from "./router-5NCBCtXM.mjs";
+import { n as useAuth } from "./router-C1c8Wu0A.mjs";
 import { a as Phone, g as Briefcase, h as Building2, i as Search, m as Calendar, o as Mail, s as LogOut, t as User } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin-DwlaYnfA.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin-v8Ke6Z92.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AdminPage() {
 	const { user, isAdmin, loading, adminReady, signOut } = useAuth();
 	const navigate = useNavigate();
 	const redirected = (0, import_react.useRef)(false);
-	if (useRouterState({ select: (s) => s.matches.some((m) => m.routeId === "/admin/login") })) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {});
+	const hasChildMatch = useRouterState({ select: (s) => s.matches.some((m) => m.routeId === "/admin/login") });
 	(0, import_react.useEffect)(() => {
-		if (loading || !adminReady) return;
+		if (hasChildMatch || loading || !adminReady) return;
 		if (!user || !isAdmin) {
 			if (!redirected.current) {
 				redirected.current = true;
@@ -21,11 +21,13 @@ function AdminPage() {
 			}
 		} else redirected.current = false;
 	}, [
+		hasChildMatch,
 		loading,
 		adminReady,
 		user,
 		isAdmin
 	]);
+	if (hasChildMatch) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {});
 	if (loading || !adminReady) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "flex min-h-screen items-center justify-center bg-surface",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {

@@ -17,18 +17,12 @@ function AdminPage() {
   const navigate = useNavigate();
   const redirected = useRef(false);
 
-  // If a child route is active (e.g. /admin/login), render it via Outlet
-  // and skip the auth guard — the guard only applies to /admin itself.
   const hasChildMatch = useRouterState({
     select: (s) => s.matches.some((m) => m.routeId === "/admin/login"),
   });
 
-  if (hasChildMatch) {
-    return <Outlet />;
-  }
-
   useEffect(() => {
-    if (loading || !adminReady) return;
+    if (hasChildMatch || loading || !adminReady) return;
     if (!user || !isAdmin) {
       if (!redirected.current) {
         redirected.current = true;
@@ -37,7 +31,11 @@ function AdminPage() {
     } else {
       redirected.current = false;
     }
-  }, [loading, adminReady, user, isAdmin]);
+  }, [hasChildMatch, loading, adminReady, user, isAdmin]);
+
+  if (hasChildMatch) {
+    return <Outlet />;
+  }
 
   if (loading || !adminReady) {
     return (
