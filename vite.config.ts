@@ -14,10 +14,5 @@ export default defineConfig({
   },
   nitro: {
     preset: "netlify",
-    output: {
-      dir: "dist",
-      serverDir: "dist/server",
-      publicDir: "dist/client",
-    },
   },
 });
