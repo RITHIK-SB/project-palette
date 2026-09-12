@@ -59,7 +59,7 @@ function AdminLoginPage() {
       <div className="w-full max-w-md">
         <div className="mb-8 flex flex-col items-center gap-3">
           <img
-            src="/maha-binu-logo.webp"
+            src="/WhatsApp_Image_2026-08-15_at_10.34.51_PM.jpeg"
             alt="MAHA BINU Fire Fighters logo"
             className="h-16 w-16 object-contain"
           />
