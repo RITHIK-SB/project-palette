@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, Link } from "@tanstack/react-router";
+import { createFileRoute, redirect, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useAuth } from "@/lib/auth";
 
@@ -14,6 +14,16 @@ export const Route = createFileRoute("/admin")({
 
 function AdminPage() {
   const { user, isAdmin, loading, signOut } = useAuth();
+
+  // If a child route is active (e.g. /admin/login), render it via Outlet
+  // and skip the auth guard — the guard only applies to /admin itself.
+  const hasChildMatch = useRouterState({
+    select: (s) => s.matches.some((m) => m.routeId === "/admin/login"),
+  });
+
+  if (hasChildMatch) {
+    return <Outlet />;
+  }
 
   if (loading) {
     return (

@@ -1,14 +1,15 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-import { O as redirect, h as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as useAuth } from "./router-BtlKbMOm.mjs";
+import { f as Outlet, g as Link, k as redirect, l as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
+import { n as useAuth } from "./router-BfAM1yOw.mjs";
 import { a as Phone, g as Briefcase, h as Building2, i as Search, m as Calendar, o as Mail, s as LogOut, t as User } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin-C114e4-_.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin-Bth-rZKl.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AdminPage() {
 	const { user, isAdmin, loading, signOut } = useAuth();
+	if (useRouterState({ select: (s) => s.matches.some((m) => m.routeId === "/admin/login") })) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {});
 	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "flex min-h-screen items-center justify-center bg-surface",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
