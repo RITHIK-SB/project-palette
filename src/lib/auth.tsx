@@ -7,6 +7,7 @@ type AuthContextValue = {
   user: User | null;
   isAdmin: boolean;
   loading: boolean;
+  adminReady: boolean;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
 };
@@ -17,6 +18,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [adminCheckLoading, setAdminCheckLoading] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -35,9 +37,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!session?.user) {
       setIsAdmin(false);
+      setAdminCheckLoading(false);
       return;
     }
 
+    setAdminCheckLoading(true);
     let cancelled = false;
     (async () => {
       const { data } = await supabase
@@ -46,7 +50,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .eq("id", session.user.id)
         .maybeSingle();
 
-      if (!cancelled) setIsAdmin(!!data);
+      if (!cancelled) {
+        setIsAdmin(!!data);
+        setAdminCheckLoading(false);
+      }
     })();
 
     return () => {
@@ -66,7 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ session, user: session?.user ?? null, isAdmin, loading, signIn, signOut }}
+      value={{ session, user: session?.user ?? null, isAdmin, loading, adminReady: !adminCheckLoading, signIn, signOut }}
     >
       {children}
     </AuthContext.Provider>

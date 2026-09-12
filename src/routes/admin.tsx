@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useAuth } from "@/lib/auth";
 
@@ -13,7 +13,8 @@ export const Route = createFileRoute("/admin")({
 });
 
 function AdminPage() {
-  const { user, isAdmin, loading, signOut } = useAuth();
+  const { user, isAdmin, loading, adminReady, signOut } = useAuth();
+  const navigate = useNavigate();
 
   // If a child route is active (e.g. /admin/login), render it via Outlet
   // and skip the auth guard — the guard only applies to /admin itself.
@@ -25,7 +26,14 @@ function AdminPage() {
     return <Outlet />;
   }
 
-  if (loading) {
+  useEffect(() => {
+    if (loading || !adminReady) return;
+    if (!user || !isAdmin) {
+      navigate({ to: "/admin/login" });
+    }
+  }, [loading, adminReady, user, isAdmin, navigate]);
+
+  if (loading || !adminReady) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-surface">
         <p className="font-sans text-base text-on-surface-variant">Loading...</p>
@@ -34,7 +42,7 @@ function AdminPage() {
   }
 
   if (!user || !isAdmin) {
-    throw redirect({ to: "/admin/login" });
+    return null;
   }
 
   return <AdminDashboard signOut={signOut} />;

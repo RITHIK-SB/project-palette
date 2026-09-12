@@ -1,23 +1,34 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-import { f as Outlet, g as Link, k as redirect, l as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as useAuth } from "./router-BfAM1yOw.mjs";
+import { _ as useNavigate, f as Outlet, g as Link, l as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
+import { n as useAuth } from "./router-C9Y5XW7i.mjs";
 import { a as Phone, g as Briefcase, h as Building2, i as Search, m as Calendar, o as Mail, s as LogOut, t as User } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin-Bth-rZKl.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin-NyQUrlYr.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AdminPage() {
-	const { user, isAdmin, loading, signOut } = useAuth();
+	const { user, isAdmin, loading, adminReady, signOut } = useAuth();
+	const navigate = useNavigate();
 	if (useRouterState({ select: (s) => s.matches.some((m) => m.routeId === "/admin/login") })) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {});
-	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	(0, import_react.useEffect)(() => {
+		if (loading || !adminReady) return;
+		if (!user || !isAdmin) navigate({ to: "/admin/login" });
+	}, [
+		loading,
+		adminReady,
+		user,
+		isAdmin,
+		navigate
+	]);
+	if (loading || !adminReady) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "flex min-h-screen items-center justify-center bg-surface",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 			className: "font-sans text-base text-on-surface-variant",
 			children: "Loading..."
 		})
 	});
-	if (!user || !isAdmin) throw redirect({ to: "/admin/login" });
+	if (!user || !isAdmin) return null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AdminDashboard, { signOut });
 }
 function AdminDashboard({ signOut }) {

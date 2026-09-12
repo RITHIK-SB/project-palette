@@ -1,5 +1,5 @@
-import { createFileRoute, redirect, Link } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useState, type FormEvent, useEffect } from "react";
 import { useAuth } from "@/lib/auth";
 import { Lock, Mail, Loader2, TriangleAlert } from "lucide-react";
 import logoAsset from "@/assets/maha-binu-logo.png.asset.json";
@@ -15,22 +15,25 @@ export const Route = createFileRoute("/admin/login")({
 });
 
 function AdminLoginPage() {
-  const { user, isAdmin, loading, signIn } = useAuth();
+  const { user, isAdmin, loading, adminReady, signIn } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  if (loading) {
+  useEffect(() => {
+    if (!loading && adminReady && user && isAdmin) {
+      navigate({ to: "/admin" });
+    }
+  }, [loading, adminReady, user, isAdmin, navigate]);
+
+  if (loading || !adminReady) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-surface">
         <p className="font-sans text-base text-on-surface-variant">Loading...</p>
       </div>
     );
-  }
-
-  if (user && isAdmin) {
-    throw redirect({ to: "/admin" });
   }
 
   const handleSubmit = async (e: FormEvent) => {

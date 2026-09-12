@@ -1,26 +1,35 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-import { g as Link, k as redirect } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as useAuth } from "./router-BfAM1yOw.mjs";
+import { _ as useNavigate, g as Link } from "../_libs/@tanstack/react-router+[...].mjs";
+import { n as useAuth } from "./router-C9Y5XW7i.mjs";
 import { c as Lock, l as LoaderCircle, n as TriangleAlert, o as Mail } from "../_libs/lucide-react.mjs";
 import { t as maha_binu_logo_png_asset_default } from "./maha-binu-logo.png.asset-D0nGwTT4.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/login-9r0phpoR.js
+//#region node_modules/.nitro/vite/services/ssr/assets/login-C9XAWHpj.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AdminLoginPage() {
-	const { user, isAdmin, loading, signIn } = useAuth();
+	const { user, isAdmin, loading, adminReady, signIn } = useAuth();
+	const navigate = useNavigate();
 	const [email, setEmail] = (0, import_react.useState)("");
 	const [password, setPassword] = (0, import_react.useState)("");
 	const [submitting, setSubmitting] = (0, import_react.useState)(false);
 	const [error, setError] = (0, import_react.useState)("");
-	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	(0, import_react.useEffect)(() => {
+		if (!loading && adminReady && user && isAdmin) navigate({ to: "/admin" });
+	}, [
+		loading,
+		adminReady,
+		user,
+		isAdmin,
+		navigate
+	]);
+	if (loading || !adminReady) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "flex min-h-screen items-center justify-center bg-surface",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 			className: "font-sans text-base text-on-surface-variant",
 			children: "Loading..."
 		})
 	});
-	if (user && isAdmin) throw redirect({ to: "/admin" });
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setSubmitting(true);
