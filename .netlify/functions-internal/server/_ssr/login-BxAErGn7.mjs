@@ -1,27 +1,32 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as useNavigate, g as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as useAuth } from "./router-C9Y5XW7i.mjs";
+import { n as useAuth } from "./router-5NCBCtXM.mjs";
 import { c as Lock, l as LoaderCircle, n as TriangleAlert, o as Mail } from "../_libs/lucide-react.mjs";
 import { t as maha_binu_logo_png_asset_default } from "./maha-binu-logo.png.asset-D0nGwTT4.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/login-C9XAWHpj.js
+//#region node_modules/.nitro/vite/services/ssr/assets/login-BxAErGn7.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AdminLoginPage() {
 	const { user, isAdmin, loading, adminReady, signIn } = useAuth();
 	const navigate = useNavigate();
+	const redirected = (0, import_react.useRef)(false);
 	const [email, setEmail] = (0, import_react.useState)("");
 	const [password, setPassword] = (0, import_react.useState)("");
 	const [submitting, setSubmitting] = (0, import_react.useState)(false);
 	const [error, setError] = (0, import_react.useState)("");
 	(0, import_react.useEffect)(() => {
-		if (!loading && adminReady && user && isAdmin) navigate({ to: "/admin" });
+		if (!loading && adminReady && user && isAdmin) {
+			if (!redirected.current) {
+				redirected.current = true;
+				navigate({ to: "/admin" });
+			}
+		} else redirected.current = false;
 	}, [
 		loading,
 		adminReady,
 		user,
-		isAdmin,
-		navigate
+		isAdmin
 	]);
 	if (loading || !adminReady) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "flex min-h-screen items-center justify-center bg-surface",

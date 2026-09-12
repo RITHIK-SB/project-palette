@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, type FormEvent, useEffect } from "react";
+import { useState, type FormEvent, useEffect, useRef } from "react";
 import { useAuth } from "@/lib/auth";
 import { Lock, Mail, Loader2, TriangleAlert } from "lucide-react";
 import logoAsset from "@/assets/maha-binu-logo.png.asset.json";
@@ -17,6 +17,7 @@ export const Route = createFileRoute("/admin/login")({
 function AdminLoginPage() {
   const { user, isAdmin, loading, adminReady, signIn } = useAuth();
   const navigate = useNavigate();
+  const redirected = useRef(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -24,9 +25,14 @@ function AdminLoginPage() {
 
   useEffect(() => {
     if (!loading && adminReady && user && isAdmin) {
-      navigate({ to: "/admin" });
+      if (!redirected.current) {
+        redirected.current = true;
+        navigate({ to: "/admin" });
+      }
+    } else {
+      redirected.current = false;
     }
-  }, [loading, adminReady, user, isAdmin, navigate]);
+  }, [loading, adminReady, user, isAdmin]);
 
   if (loading || !adminReady) {
     return (
