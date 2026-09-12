@@ -124,8 +124,8 @@ export function RegistrationSection() {
               <h3 className="font-sans text-base font-bold text-foreground">Limited Time Offer</h3>
             </div>
             <p className="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-on-surface-variant">
-              Registration closes strictly at the conclusion of the Expo 2026 event on November
-              30th. Late submissions will not qualify for the fee waiver.
+              Registration closes strictly at the conclusion of the Expo 2026 event on October
+              10th. Late submissions will not qualify for the fee waiver.
             </p>
           </div>
         </div>

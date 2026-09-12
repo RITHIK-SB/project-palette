@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-B2-KuKiY.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-UixAM5kD.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -291,7 +291,7 @@ function RegistrationSection() {
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "mt-2 text-pretty font-sans text-[15px] leading-relaxed text-on-surface-variant",
-							children: "Registration closes strictly at the conclusion of the Expo 2026 event on November 30th. Late submissions will not qualify for the fee waiver."
+							children: "Registration closes strictly at the conclusion of the Expo 2026 event on October 10th. Late submissions will not qualify for the fee waiver."
 						})]
 					})
 				]
