@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import firePanelAsset from "@/assets/fire-panel.png.asset.json";
 
 export function HeroSection() {
   return (
@@ -26,7 +25,7 @@ export function HeroSection() {
 
         <div className="overflow-hidden rounded-lg border border-border">
           <img
-            src={firePanelAsset.url}
+            src="/fire-panel.webp"
             alt="Fire safety alarm control panel mounted in a modern commercial building corridor"
             className="aspect-[4/3] h-full w-full object-cover"
           />

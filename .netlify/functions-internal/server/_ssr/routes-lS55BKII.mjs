@@ -2,8 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-import { t as maha_binu_logo_png_asset_default } from "./maha-binu-logo.png.asset-D0nGwTT4.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-Cd2bC2x6.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-lS55BKII.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -22,7 +21,7 @@ function SiteHeader() {
 					className: "flex items-center gap-1",
 					"aria-label": "MAHA BINU Fire Fighters home",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-						src: maha_binu_logo_png_asset_default.url,
+						src: "/maha-binu-logo.webp",
 						alt: "MAHA BINU Fire Fighters logo",
 						className: "h-12 w-12 object-contain"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
@@ -56,17 +55,6 @@ function SiteHeader() {
 		})
 	});
 }
-var fire_panel_png_asset_default = {
-	version: 1,
-	asset_id: "8c4e3193-2281-4079-8de6-4534222f7430",
-	project_id: "2684474a-4d92-46db-aec3-6fe11167404a",
-	url: "/__l5e/assets-v1/8c4e3193-2281-4079-8de6-4534222f7430/fire-panel.png",
-	r2_key: "a/v1/2684474a-4d92-46db-aec3-6fe11167404a/8c4e3193-2281-4079-8de6-4534222f7430/fire-panel.png",
-	original_filename: "fire-panel.png",
-	size: 1249742,
-	content_type: "image/png",
-	created_at: "2026-08-30T08:56:01Z"
-};
 function HeroSection() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 		id: "plans",
@@ -100,7 +88,7 @@ function HeroSection() {
 			] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "overflow-hidden rounded-lg border border-border",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: fire_panel_png_asset_default.url,
+					src: "/fire-panel.webp",
 					alt: "Fire safety alarm control panel mounted in a modern commercial building corridor",
 					className: "aspect-[4/3] h-full w-full object-cover"
 				})
@@ -179,17 +167,6 @@ function WhyChooseSection() {
 		})
 	});
 }
-var team_warehouse_png_asset_default = {
-	version: 1,
-	asset_id: "84b439c7-a3ed-433b-9c45-5f063e6fab93",
-	project_id: "2684474a-4d92-46db-aec3-6fe11167404a",
-	url: "/__l5e/assets-v1/84b439c7-a3ed-433b-9c45-5f063e6fab93/team-warehouse.png",
-	r2_key: "a/v1/2684474a-4d92-46db-aec3-6fe11167404a/84b439c7-a3ed-433b-9c45-5f063e6fab93/team-warehouse.png",
-	original_filename: "team-warehouse.png",
-	size: 1044002,
-	content_type: "image/png",
-	created_at: "2026-08-30T08:56:09Z"
-};
 function QuoteBanner() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 		className: "bg-surface",
@@ -198,7 +175,7 @@ function QuoteBanner() {
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "overflow-hidden rounded-lg border border-border",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: team_warehouse_png_asset_default.url,
+					src: "/team-warehouse.webp",
 					alt: "Fire safety engineers inspecting equipment inside an industrial warehouse, with the quote: Protecting lives and assets with structural integrity and unwavering operational excellence.",
 					className: "h-auto w-full object-cover"
 				})

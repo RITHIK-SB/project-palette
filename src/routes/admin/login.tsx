@@ -2,7 +2,6 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent, useEffect, useRef } from "react";
 import { useAuth } from "@/lib/auth";
 import { Lock, Mail, Loader2, TriangleAlert } from "lucide-react";
-import logoAsset from "@/assets/maha-binu-logo.png.asset.json";
 
 export const Route = createFileRoute("/admin/login")({
   component: AdminLoginPage,
@@ -60,7 +59,7 @@ function AdminLoginPage() {
       <div className="w-full max-w-md">
         <div className="mb-8 flex flex-col items-center gap-3">
           <img
-            src={logoAsset.url}
+            src="/maha-binu-logo.webp"
             alt="MAHA BINU Fire Fighters logo"
             className="h-16 w-16 object-contain"
           />

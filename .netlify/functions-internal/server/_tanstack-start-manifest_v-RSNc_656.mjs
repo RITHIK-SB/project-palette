@@ -1,29 +1,29 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-BbYy_6ZU.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-RSNc_656.js
 var tsrStartManifest = () => ({ routes: {
 	__root__: {
 		filePath: "/tmp/cc-agent/70809999/project/src/routes/__root.tsx",
 		children: ["/", "/admin"],
-		preloads: ["/assets/index-bv8eyKck.js", "/assets/supabase-S0QJyxR7.js"],
+		preloads: ["/assets/index-DQf5N_2_.js", "/assets/supabase-S0QJyxR7.js"],
 		scripts: [{ attrs: {
 			type: "module",
 			async: !0,
-			src: "/assets/index-bv8eyKck.js"
+			src: "/assets/index-DQf5N_2_.js"
 		} }]
 	},
 	"/": {
 		filePath: "/tmp/cc-agent/70809999/project/src/routes/index.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/routes-CNrB2ANn.js",
+			"/assets/routes-DQVcDDDD.js",
 			"/assets/createLucideIcon-DsRxaOK2.js",
-			"/assets/maha-binu-logo.png.asset-CkQ_YNUr.js"
+			"/assets/triangle-alert-CyICWKz9.js"
 		]
 	},
 	"/admin": {
 		filePath: "/tmp/cc-agent/70809999/project/src/routes/admin.tsx",
 		children: ["/admin/login"],
 		preloads: [
-			"/assets/admin-DV9HP4VK.js",
+			"/assets/admin-BGAab-I4.js",
 			"/assets/createLucideIcon-DsRxaOK2.js",
 			"/assets/mail-C5EyUJ1Q.js"
 		]
@@ -31,7 +31,7 @@ var tsrStartManifest = () => ({ routes: {
 	"/admin/login": {
 		filePath: "/tmp/cc-agent/70809999/project/src/routes/admin/login.tsx",
 		children: void 0,
-		preloads: ["/assets/login-DOrUBaxt.js", "/assets/maha-binu-logo.png.asset-CkQ_YNUr.js"]
+		preloads: ["/assets/login-BgCIFuS9.js", "/assets/triangle-alert-CyICWKz9.js"]
 	}
 } });
 //#endregion

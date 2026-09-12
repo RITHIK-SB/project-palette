@@ -1,7 +1,5 @@
 "use client";
 
-import logoAsset from "@/assets/maha-binu-logo.png.asset.json";
-
 const navItems = [
   { id: "about", label: "About", href: "#about" },
 ];
@@ -13,7 +11,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-2 md:px-4">
         <a href="#" className="flex items-center gap-1" aria-label="MAHA BINU Fire Fighters home">
           <img
-            src={logoAsset.url}
+            src="/maha-binu-logo.webp"
             alt="MAHA BINU Fire Fighters logo"
             className="h-12 w-12 object-contain"
           />
