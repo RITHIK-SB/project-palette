@@ -102,6 +102,33 @@ export function RegistrationSection() {
     setStatus("success");
     setMessage("Registration successful! Our engineering team will contact you shortly.");
     setForm(initialState);
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-registration-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            email: payload.email,
+            company_name: payload.company_name,
+            contact_person: payload.contact_person,
+            designation: payload.designation,
+            mobile_number: payload.mobile_number,
+            building_type: payload.building_type,
+            building_type_other: payload.building_type_other,
+          }),
+        },
+      );
+      if (!response.ok) {
+        console.warn("Confirmation email failed to send, but registration was saved.");
+      }
+    } catch {
+      console.warn("Confirmation email request failed, but registration was saved.");
+    }
   };
 
   return (

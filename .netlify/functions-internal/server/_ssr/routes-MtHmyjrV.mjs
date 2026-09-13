@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-UixAM5kD.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-MtHmyjrV.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -264,6 +264,26 @@ function RegistrationSection() {
 		setStatus("success");
 		setMessage("Registration successful! Our engineering team will contact you shortly.");
 		setForm(initialState);
+		try {
+			if (!(await fetch(`https://ykwauaijddycdchcibex.supabase.co/functions/v1/send-registration-email`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlrd2F1YWlqZGR5Y2RjaGNpYmV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NjI1NzksImV4cCI6MjEwNDUzODU3OX0.w2lb6rxg_pripaBSlT-ruYKwrRZG2jrX-8e-fLvgaXA`
+				},
+				body: JSON.stringify({
+					email: payload.email,
+					company_name: payload.company_name,
+					contact_person: payload.contact_person,
+					designation: payload.designation,
+					mobile_number: payload.mobile_number,
+					building_type: payload.building_type,
+					building_type_other: payload.building_type_other
+				})
+			})).ok) console.warn("Confirmation email failed to send, but registration was saved.");
+		} catch {
+			console.warn("Confirmation email request failed, but registration was saved.");
+		}
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 		id: "register",
