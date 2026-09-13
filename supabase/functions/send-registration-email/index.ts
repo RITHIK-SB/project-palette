@@ -178,7 +178,7 @@ Deno.serve(async (req: Request) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "MAHA BINU Fire Fighters <noreply@mahabinufirefighters.com>",
+        from: "MAHA BINU Fire Fighters <onboarding@resend.dev>",
         to: [data.email],
         subject: "Registration Confirmed — MAHA BINU Fire Fighters | Synergy 2026 Expo",
         html,
