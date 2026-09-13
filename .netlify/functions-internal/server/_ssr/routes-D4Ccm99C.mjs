@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-MtHmyjrV.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-D4Ccm99C.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -21,7 +21,7 @@ function SiteHeader() {
 					className: "flex items-center gap-1",
 					"aria-label": "MAHA BINU Fire Fighters home",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-						src: "/WhatsApp_Image_2026-08-15_at_10.34.51_PM.jpeg",
+						src: "/maha-binu-logo.webp",
 						alt: "MAHA BINU Fire Fighters logo",
 						className: "h-12 w-12 object-contain"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
@@ -88,7 +88,7 @@ function HeroSection() {
 			] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "overflow-hidden rounded-lg border border-border",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: "/Screenshot_2026-09-12_at_4.35.51_PM.png",
+					src: "/fire-panel.webp",
 					alt: "Fire safety alarm control panel mounted in a modern commercial building corridor",
 					className: "aspect-[4/3] h-full w-full object-cover"
 				})
@@ -175,7 +175,7 @@ function QuoteBanner() {
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "overflow-hidden rounded-lg border border-border",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: "/Screenshot_2026-08-29_at_5.09.20_PM.png",
+					src: "/team-warehouse.webp",
 					alt: "Fire safety engineers inspecting equipment inside an industrial warehouse, with the quote: Protecting lives and assets with structural integrity and unwavering operational excellence.",
 					className: "h-auto w-full object-cover"
 				})

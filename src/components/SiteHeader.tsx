@@ -11,7 +11,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-2 md:px-4">
         <a href="#" className="flex items-center gap-1" aria-label="MAHA BINU Fire Fighters home">
           <img
-            src="/WhatsApp_Image_2026-08-15_at_10.34.51_PM.jpeg"
+            src="/maha-binu-logo.webp"
             alt="MAHA BINU Fire Fighters logo"
             className="h-12 w-12 object-contain"
           />

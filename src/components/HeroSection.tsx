@@ -25,7 +25,7 @@ export function HeroSection() {
 
         <div className="overflow-hidden rounded-lg border border-border">
           <img
-            src="/Screenshot_2026-09-12_at_4.35.51_PM.png"
+            src="/fire-panel.webp"
             alt="Fire safety alarm control panel mounted in a modern commercial building corridor"
             className="aspect-[4/3] h-full w-full object-cover"
           />
