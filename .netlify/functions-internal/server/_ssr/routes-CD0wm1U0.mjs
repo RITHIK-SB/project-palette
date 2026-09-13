@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-D-qJjpXt.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CD0wm1U0.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -14,7 +14,7 @@ function SiteHeader() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("header", {
 		className: "sticky top-0 z-50 border-b border-border bg-background",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-2 md:px-4",
+			className: "mx-auto flex h-14 max-w-[1280px] items-center justify-between gap-1.5 px-2 md:h-16 md:gap-4 md:px-4",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 					href: "#",
@@ -23,14 +23,14 @@ function SiteHeader() {
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 						src: "/WhatsApp_Image_2026-08-15_at_10.34.51_PM.jpeg",
 						alt: "MAHA BINU Fire Fighters logo",
-						className: "h-12 w-12 object-contain"
+						className: "h-8 w-8 shrink-0 object-contain md:h-12 md:w-12"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "flex flex-col leading-tight",
+						className: "flex min-w-0 flex-col leading-tight",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-sans text-base font-extrabold tracking-tight text-primary md:text-lg",
+							className: "font-sans text-[11px] font-extrabold tracking-tight text-primary md:text-base md:tracking-tight lg:text-lg",
 							children: "MAHA BINU FIRE FIGHTERS PVT LTD"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-foreground/60 md:text-xs",
+							className: "font-sans text-[9px] font-medium uppercase tracking-[0.15em] text-foreground/60 md:text-[11px] lg:text-xs",
 							children: "Your trusted fire safety partner"
 						})]
 					})]
@@ -48,7 +48,7 @@ function SiteHeader() {
 					href: "https://www.mahabinufirefighters.com/contact-us/#wpcf7-f184-p22-o1",
 					target: "_blank",
 					rel: "noopener noreferrer",
-					className: "inline-flex items-center justify-center rounded-md bg-secondary px-5 py-2.5 font-sans text-sm font-bold text-secondary-foreground transition-colors hover:bg-secondary/90",
+					className: "inline-flex shrink-0 items-center justify-center rounded-md bg-secondary px-3 py-1.5 font-sans text-xs font-bold text-secondary-foreground transition-colors hover:bg-secondary/90 md:px-5 md:py-2.5 md:text-sm",
 					children: "Contact Us"
 				})
 			]
