@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-MtHmyjrV.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-D-qJjpXt.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -45,7 +45,7 @@ function SiteHeader() {
 					}, item.id))
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-					href: "https://www.mahabinufirefighters.com",
+					href: "https://www.mahabinufirefighters.com/contact-us/#wpcf7-f184-p22-o1",
 					target: "_blank",
 					rel: "noopener noreferrer",
 					className: "inline-flex items-center justify-center rounded-md bg-secondary px-5 py-2.5 font-sans text-sm font-bold text-secondary-foreground transition-colors hover:bg-secondary/90",
