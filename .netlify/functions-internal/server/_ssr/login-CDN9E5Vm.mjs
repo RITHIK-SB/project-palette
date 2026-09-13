@@ -1,9 +1,9 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as useNavigate, g as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as useAuth } from "./router-hvDyyhOV.mjs";
+import { n as useAuth } from "./router-CB-OWAH5.mjs";
 import { c as Lock, l as LoaderCircle, n as TriangleAlert, o as Mail } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/login-BvB_IQSq.js
+//#region node_modules/.nitro/vite/services/ssr/assets/login-CDN9E5Vm.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AdminLoginPage() {
@@ -52,7 +52,7 @@ function AdminLoginPage() {
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "mb-8 flex flex-col items-center gap-3",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-						src: "/maha-binu-logo.webp",
+						src: "/WhatsApp_Image_2026-08-15_at_10.34.51_PM.jpeg",
 						alt: "MAHA BINU Fire Fighters logo",
 						className: "h-16 w-16 object-contain"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
