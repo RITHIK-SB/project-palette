@@ -38,66 +38,44 @@ function buildEmailHtml(data: RegistrationData): string {
     <style>
       @media only screen and (max-width: 620px) {
         .email-shell { width: 100% !important; }
-        .email-pad { padding-left: 22px !important; padding-right: 22px !important; }
+        .email-pad { padding-left: 28px !important; padding-right: 28px !important; }
         .detail-label, .detail-value { display: block !important; width: 100% !important; }
-        .event-cell { display: block !important; width: 100% !important; border-right: 0 !important; border-bottom: 1px solid #ead3d0 !important; }
-        .event-cell:last-child { border-bottom: 0 !important; }
       }
     </style>
   </head>
-  <body style="margin:0;padding:0;background-color:#f4f5f7;font-family:Arial,Helvetica,sans-serif;color:#142a47;">
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#f4f5f7;padding:20px 10px;">
+  <body style="margin:0;padding:0;background-color:#f1f3f6;font-family:Arial,Helvetica,sans-serif;color:#4d4d4d;">
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#f1f3f6;">
       <tr>
         <td align="center">
           <table class="email-shell" width="640" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;max-width:640px;background-color:#ffffff;">
             <tr>
-              <td class="email-pad" style="padding:26px 42px 22px;background-color:#ffffff;">
-                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                  <tr>
-                    <td width="70" valign="middle" style="width:70px;padding-right:14px;">
-                      <table width="58" height="70" cellpadding="0" cellspacing="0" role="presentation" style="width:58px;height:70px;">
-                        <tr><td align="center" valign="middle" style="background-color:#a9151b;border-radius:30px 30px 26px 26px;color:#ffffff;font-size:30px;font-weight:700;line-height:1;">M</td></tr>
-                      </table>
-                    </td>
-                    <td valign="middle" style="border-left:1px solid #d9aaa5;padding-left:16px;">
-                      <div style="font-size:28px;line-height:1.05;font-weight:800;letter-spacing:1px;color:#9e171c;">MAHA BINU</div>
-                      <div style="margin-top:5px;font-size:17px;line-height:1.1;font-weight:700;letter-spacing:4px;color:#a9151b;">FIRE FIGHTERS</div>
-                      <div style="margin-top:8px;font-size:14px;line-height:1.3;color:#294563;">Your trusted safety partner</div>
-                    </td>
-                  </tr>
-                </table>
+              <td style="padding:0 58px;background-color:#c51d1d;color:#ffffff;">
+                <div style="padding:0 0 44px;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:.2px;">
+                  MAHA BINU FIRE FIGHTERS PVT LTD
+                </div>
+                <div style="padding-bottom:46px;font-size:20px;line-height:1.2;letter-spacing:2px;color:#ffd7d7;">
+                  YOUR TRUSTED FIRE SAFETY PARTNER
+                </div>
               </td>
             </tr>
 
             <tr>
-              <td class="email-pad" style="padding:30px 42px 28px;background-color:#720508;background-image:linear-gradient(110deg,#560304,#a30c0d 62%,#d43d12);">
-                <div style="width:64px;height:5px;background-color:#f2a900;margin-bottom:18px;"></div>
-                <div style="font-size:32px;line-height:1.15;font-weight:700;color:#ffffff;">Registration <span style="color:#f5b400;">Confirmed</span></div>
-                <div style="margin-top:10px;font-size:19px;line-height:1.4;color:#ffffff;">Thank you for registering for the<br /><strong>Synergy 2026 Expo.</strong></div>
-              </td>
-            </tr>
+              <td class="email-pad" style="padding:56px 58px 52px;background-color:#ffffff;">
+                <h1 style="margin:0 0 20px;font-size:29px;line-height:1.2;font-weight:700;color:#1d1d1d;">Registration Confirmed</h1>
+                <p style="margin:0 0 36px;font-size:22px;line-height:1.45;color:#555555;">Dear ${escapeHtml(data.contact_person)},</p>
+                <p style="margin:0 0 34px;font-size:21px;line-height:1.65;color:#555555;">
+                  Thank you for registering for the <strong>Synergy 2026 Expo offer</strong> with MAHA BINU FIRE FIGHTERS. We have received your registration for a free Annual Maintenance Contract (AMC) baseline assessment, and our engineering team will contact you shortly to schedule the initial site visit.
+                </p>
 
-            <tr>
-              <td class="email-pad" style="padding:30px 42px 34px;background-color:#ffffff;">
-                <p style="margin:0 0 20px;font-size:17px;line-height:1.5;font-weight:700;color:#142a47;">Dear ${escapeHtml(data.contact_person)},</p>
-                <p style="margin:0 0 10px;font-size:16px;line-height:1.65;color:#294563;">We are pleased to confirm that your registration has been successfully received by <strong style="color:#142a47;">MAHA BINU Fire Fighters</strong> for the <strong style="color:#142a47;">Synergy 2026 Expo.</strong></p>
-                <p style="margin:0 0 22px;font-size:16px;line-height:1.65;color:#294563;">Below are your registration details for your reference:</p>
-
-                <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid #f0d6d1;border-radius:12px;background-color:#fffdfc;">
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid #dfe2e6;border-radius:9px;background-color:#ffffff;">
                   <tr>
-                    <td style="padding:20px 24px 14px;">
+                    <td style="padding:34px 40px 32px;">
+                      <div style="margin-bottom:26px;font-size:20px;line-height:1.2;font-weight:700;letter-spacing:1px;color:#1d1d1d;">REGISTRATION DETAILS</div>
                       <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                        <tr>
-                          <td width="38" valign="middle" style="width:38px;font-size:25px;color:#a9151b;">▤</td>
-                          <td valign="middle" style="font-size:20px;font-weight:700;color:#a9151b;">Registration Details</td>
-                        </tr>
-                      </table>
-                      <div style="height:1px;background-color:#ead3d0;margin:15px 0 10px;"></div>
-                      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                        ${detailRow("Company", data.company_name)}
+                        ${detailRow("Company Name", data.company_name)}
                         ${detailRow("Contact Person", data.contact_person)}
                         ${detailRow("Designation", data.designation)}
-                        ${detailRow("Mobile", data.mobile_number)}
+                        ${detailRow("Mobile Number", data.mobile_number)}
                         ${detailRow("Email", data.email)}
                         ${detailRow("Building Type", buildingTypeLabel)}
                       </table>
@@ -105,43 +83,23 @@ function buildEmailHtml(data: RegistrationData): string {
                   </tr>
                 </table>
 
-                <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin-top:16px;background-color:#fff7f5;border-radius:12px;">
-                  <tr>
-                    <td class="event-cell" width="50%" valign="top" style="width:50%;padding:20px 22px;border-right:1px solid #ead3d0;">
-                      <div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:1px;color:#a9151b;text-transform:uppercase;">Event Date</div>
-                      <div style="margin-top:8px;font-size:17px;line-height:1.4;font-weight:700;color:#142a47;">October 10, 2026</div>
-                    </td>
-                    <td class="event-cell" width="50%" valign="top" style="width:50%;padding:20px 22px;">
-                      <div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:1px;color:#a9151b;text-transform:uppercase;">Venue</div>
-                      <div style="margin-top:8px;font-size:17px;line-height:1.4;font-weight:700;color:#142a47;">Synergy 2026 Expo</div>
-                    </td>
-                  </tr>
-                </table>
+                <h2 style="margin:38px 0 22px;font-size:22px;line-height:1.3;font-weight:700;color:#555555;">What happens next?</h2>
+                <ul style="margin:0 0 36px;padding-left:28px;font-size:21px;line-height:1.65;color:#555555;">
+                  <li style="padding-left:4px;">Our engineering team will reach out to you within 2–3 business days.</li>
+                  <li style="padding-left:4px;">We will schedule a convenient time for your baseline fire safety assessment.</li>
+                  <li style="padding-left:4px;">You will receive a detailed report with recommendations — completely free of charge.</li>
+                </ul>
 
-                <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin-top:16px;background-color:#f5f7fa;border-radius:12px;">
-                  <tr>
-                    <td style="padding:19px 22px;">
-                      <div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:1px;color:#a9151b;text-transform:uppercase;">Need Assistance?</div>
-                      <div style="margin-top:7px;font-size:14px;line-height:1.5;color:#294563;">For any queries regarding your registration, please contact our team:</div>
-                      <div style="margin-top:8px;font-size:16px;line-height:1.5;font-weight:700;color:#142a47;">Arun <span style="color:#c8b8b5;padding:0 12px;">|</span> <a href="tel:+914423780690" style="color:#142a47;text-decoration:none;">+91 4423780690</a></div>
-                    </td>
-                  </tr>
-                </table>
-
-                <p style="margin:22px 0 14px;font-size:16px;line-height:1.6;color:#294563;">Please keep this email for your records. Our team may contact you with additional information regarding the expo.</p>
-                <p style="margin:0 0 22px;font-size:16px;line-height:1.6;color:#294563;">We look forward to welcoming you at the <strong style="color:#142a47;">Synergy 2026 Expo!</strong></p>
-                <p style="margin:0;font-size:16px;line-height:1.5;color:#294563;">Best Regards,<br /><strong style="font-size:18px;color:#a9151b;">Team MAHA BINU Fire Fighters</strong><br /><span style="font-size:14px;color:#294563;">Your trusted safety partner</span></p>
+                <p style="margin:0 0 32px;font-size:21px;line-height:1.6;color:#555555;">If you have any questions in the meantime, feel free to reach us at</p>
+                <p style="margin:0;font-size:21px;line-height:1.6;color:#555555;">Best Regards,<br /><strong>Team MAHA BINU Fire Fighters</strong></p>
+                <p style="margin:36px 0 0;font-size:18px;line-height:1.7;color:#555555;">Contact: Arun<br />Number: +91 4423780609</p>
               </td>
             </tr>
 
             <tr>
-              <td style="padding:24px 42px;background-color:#720508;color:#ffffff;">
-                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                  <tr>
-                    <td style="font-size:14px;line-height:1.45;font-weight:700;">Advanced Fire Safety Solutions<br />for a Safer Tomorrow</td>
-                    <td align="right" style="font-size:14px;line-height:1.45;font-weight:700;">MAHA BINU FIRE FIGHTERS<br /><span style="font-weight:400;color:#f7d6d0;">Your trusted safety partner</span></td>
-                  </tr>
-                </table>
+              <td style="padding:28px 58px;background-color:#c51d1d;color:#ffffff;text-align:center;">
+                <div style="font-size:16px;line-height:1.5;font-weight:700;">MAHA BINU FIRE FIGHTERS PVT LTD</div>
+                <div style="margin-top:5px;font-size:14px;line-height:1.5;color:#ffd7d7;">YOUR TRUSTED FIRE SAFETY PARTNER</div>
               </td>
             </tr>
           </table>
@@ -153,9 +111,15 @@ function buildEmailHtml(data: RegistrationData): string {
 }
 
 function detailRow(label: string, value: string): string {
+  const escapedValue = escapeHtml(value);
+  const renderedValue =
+    label === "Email"
+      ? `<a href="mailto:${escapedValue}" style="color:#1155cc;text-decoration:underline;">${escapedValue}</a>`
+      : escapedValue;
+
   return `<tr>
-    <td style="padding:6px 0;color:#6b7280;font-size:14px;width:40%;vertical-align:top;">${escapeHtml(label)}</td>
-    <td style="padding:6px 0;color:#1a1a1a;font-size:14px;font-weight:500;vertical-align:top;">${escapeHtml(value)}</td>
+    <td class="detail-label" style="padding:7px 0;color:#687181;font-size:20px;line-height:1.45;width:46%;vertical-align:top;">${escapeHtml(label)}</td>
+    <td class="detail-value" style="padding:7px 0;color:#202020;font-size:20px;line-height:1.45;font-weight:600;vertical-align:top;">${renderedValue}</td>
   </tr>`;
 }
 
