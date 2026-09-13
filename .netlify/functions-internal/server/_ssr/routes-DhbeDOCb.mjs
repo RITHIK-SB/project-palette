@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CD0wm1U0.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DhbeDOCb.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -27,10 +27,10 @@ function SiteHeader() {
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 						className: "flex min-w-0 flex-col leading-tight",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-sans text-[11px] font-extrabold tracking-tight text-primary md:text-base md:tracking-tight lg:text-lg",
+							className: "font-sans text-[11px] font-extrabold tracking-tight text-primary md:text-lg",
 							children: "MAHA BINU FIRE FIGHTERS PVT LTD"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-sans text-[9px] font-medium uppercase tracking-[0.15em] text-foreground/60 md:text-[11px] lg:text-xs",
+							className: "font-sans text-[9px] font-medium uppercase tracking-[0.15em] text-foreground/60 md:text-xs",
 							children: "Your trusted fire safety partner"
 						})]
 					})]

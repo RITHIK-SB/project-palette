@@ -4,10 +4,10 @@ import { t as __exportAll } from "./rolldown-runtime-D7D4PA-g.mjs";
 import { n as require_jsx_runtime, r as require_react, t as QueryClientProvider } from "../_libs/react+tanstack__react-query.mjs";
 import { c as HeadContent, d as createRouter, f as Outlet, g as Link, h as createRootRouteWithContext, m as createFileRoute, p as lazyRouteComponent, s as Scripts, v as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-CV5ATBdK.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-Brt8zuGx.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-Bk12r8At.css";
+var styles_default = "/assets/styles-C99TtvTl.css";
 function reportLovableError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__lovableEvents?.captureException?.(error, {
@@ -225,7 +225,7 @@ function RootComponent() {
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {}) })
 	});
 }
-var $$splitComponentImporter$2 = () => import("./routes-CD0wm1U0.mjs");
+var $$splitComponentImporter$2 = () => import("./routes-DhbeDOCb.mjs");
 var Route$2 = createFileRoute("/")({
 	component: lazyRouteComponent($$splitComponentImporter$2, "component"),
 	head: () => ({ meta: [
@@ -252,7 +252,7 @@ var Route$2 = createFileRoute("/")({
 		}
 	] })
 });
-var $$splitComponentImporter$1 = () => import("./admin-DJ2LsOvn.mjs");
+var $$splitComponentImporter$1 = () => import("./admin-MVLO7_Ye.mjs");
 var Route$1 = createFileRoute("/admin")({
 	component: lazyRouteComponent($$splitComponentImporter$1, "component"),
 	head: () => ({ meta: [{ title: "Admin Dashboard | MAHA BINU Fire Fighters" }, {
@@ -260,7 +260,7 @@ var Route$1 = createFileRoute("/admin")({
 		content: "Admin dashboard for viewing AMC registrations."
 	}] })
 });
-var $$splitComponentImporter = () => import("./login-K4n_vUo-.mjs");
+var $$splitComponentImporter = () => import("./login-CU2Acu7a.mjs");
 var Route = createFileRoute("/admin/login")({
 	component: lazyRouteComponent($$splitComponentImporter, "component"),
 	head: () => ({ meta: [{ title: "Admin Login | MAHA BINU Fire Fighters" }, {

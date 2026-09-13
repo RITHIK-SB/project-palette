@@ -16,10 +16,10 @@ export function SiteHeader() {
             className="h-8 w-8 shrink-0 object-contain md:h-12 md:w-12"
           />
           <span className="flex min-w-0 flex-col leading-tight">
-            <span className="font-sans text-[11px] font-extrabold tracking-tight text-primary md:text-base md:tracking-tight lg:text-lg">
+            <span className="font-sans text-[11px] font-extrabold tracking-tight text-primary md:text-lg">
               MAHA BINU FIRE FIGHTERS PVT LTD
             </span>
-            <span className="font-sans text-[9px] font-medium uppercase tracking-[0.15em] text-foreground/60 md:text-[11px] lg:text-xs">
+            <span className="font-sans text-[9px] font-medium uppercase tracking-[0.15em] text-foreground/60 md:text-xs">
               Your trusted fire safety partner
             </span>
           </span>
