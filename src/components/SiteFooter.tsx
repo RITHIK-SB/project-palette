@@ -17,9 +17,9 @@ export function SiteFooter() {
 
           <div>
             <h3 className="font-label text-sm font-bold text-white">Legal &amp; Resources</h3>
-            <ul className="mt-5 flex list-none flex-col gap-3 [&>li::marker]:hidden">
+            <ul className="mt-5 flex flex-col gap-3">
               {links.map((link, i) => (
-                <li key={link} className="list-none [&::marker]:hidden">
+                <li key={link}>
                   <a
                     href="#"
                     className={`font-sans text-sm transition-colors hover:text-white ${

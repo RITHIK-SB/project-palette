@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-wkh9w0rD.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-D-qJjpXt.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -495,15 +495,12 @@ function SiteFooter() {
 					className: "font-label text-sm font-bold text-white",
 					children: "Legal & Resources"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-					className: "mt-5 flex list-none flex-col gap-3 [&>li::marker]:hidden",
-					children: links.map((link, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-						className: "list-none [&::marker]:hidden",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-							href: "#",
-							className: `font-sans text-sm transition-colors hover:text-white ${i === links.length - 1 ? "font-semibold text-white underline underline-offset-4" : "text-footer-foreground/80"}`,
-							children: link
-						})
-					}, link))
+					className: "mt-5 flex flex-col gap-3",
+					children: links.map((link, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						href: "#",
+						className: `font-sans text-sm transition-colors hover:text-white ${i === links.length - 1 ? "font-semibold text-white underline underline-offset-4" : "text-footer-foreground/80"}`,
+						children: link
+					}) }, link))
 				})] })]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "mt-12 border-t border-white/10 pt-6",
