@@ -15,7 +15,7 @@ export function HeroSection() {
           </h1>
 
           <p className="mt-5 max-w-md text-pretty font-sans text-lg leading-relaxed text-on-surface-variant">
-            Our certified technicians will visit your facility to perform a thorough, complimentary
+            Our certified technicians will visit your facility to perform a thorough
             inspection of your fire protection systems
           </p>
 
