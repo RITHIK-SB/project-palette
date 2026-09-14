@@ -24,7 +24,7 @@ export function HeroSection() {
               Limited to first {MAX_REGISTRATIONS} registrations
             </div>
 
-            <div className="flex min-h-[116px] items-center gap-5 rounded-xl border border-primary/25 border-t-4 bg-card px-7 py-5 shadow-sm sm:gap-6 sm:px-8">
+            <div className="flex min-h-[120px] w-[350px] max-w-full items-center gap-5 rounded-xl border border-primary/25 border-t-4 bg-card px-7 py-5 shadow-sm sm:gap-6 sm:px-8">
               {isFull ? (
                 <span className="font-sans text-2xl font-extrabold uppercase leading-tight text-primary sm:text-3xl">
                   Registration closed
