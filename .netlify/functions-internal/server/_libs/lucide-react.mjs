@@ -266,6 +266,16 @@ var ClipboardCheck = createLucideIcon("clipboard-check", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var Flame = createLucideIcon("flame", [["path", {
+	d: "M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4",
+	key: "1slcih"
+}]]);
+/**
+* @license lucide-react v0.575.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Headphones = createLucideIcon("headphones", [["path", {
 	d: "M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3",
 	key: "1xhozi"
@@ -409,4 +419,4 @@ var User = createLucideIcon("user", [["path", {
 	key: "17ys0d"
 }]]);
 //#endregion
-export { Ban as _, Phone as a, Lock as c, ClipboardCheck as d, CircleCheck as f, Briefcase as g, Building2 as h, Search as i, LoaderCircle as l, Calendar as m, TriangleAlert as n, Mail as o, ChevronDown as p, ShieldCheck as r, LogOut as s, User as t, Headphones as u, ArrowRight as v };
+export { Briefcase as _, Phone as a, Lock as c, Flame as d, ClipboardCheck as f, Building2 as g, Calendar as h, Search as i, LoaderCircle as l, ChevronDown as m, TriangleAlert as n, Mail as o, CircleCheck as p, ShieldCheck as r, LogOut as s, User as t, Headphones as u, Ban as v, ArrowRight as y };

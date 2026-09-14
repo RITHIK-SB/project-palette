@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Flame } from "lucide-react";
 import { useRemainingSpots } from "@/hooks/use-remaining-spots";
 
 export function HeroSection() {
@@ -18,23 +18,32 @@ export function HeroSection() {
             inspection of your fire protection systems
           </p>
 
-          <div className="mt-5 inline-flex flex-col gap-0.5">
-            <span className="font-sans text-sm font-bold uppercase tracking-wide text-primary">
+          <div className="mt-6 flex w-full max-w-md flex-col gap-4">
+            <div className="inline-flex w-fit items-center gap-2 rounded-full bg-alert-amber px-4 py-2 font-sans text-xs font-extrabold uppercase tracking-[0.08em] text-foreground sm:text-sm">
+              <Flame className="h-4 w-4 fill-current" aria-hidden="true" />
               Limited to first {MAX_REGISTRATIONS} registrations
-            </span>
-            {isFull ? (
-              <span className="font-sans text-lg font-extrabold text-primary">
-                REGISTRATION CLOSED
-              </span>
-            ) : remaining !== null ? (
-              <span className="font-sans text-lg font-extrabold text-foreground">
-                {remaining} spots remaining
-              </span>
-            ) : (
-              <span className="font-sans text-lg font-extrabold text-on-surface-variant">
-                Loading availability...
-              </span>
-            )}
+            </div>
+
+            <div className="flex min-h-[116px] items-center gap-5 rounded-xl border border-primary/25 border-t-4 bg-card px-7 py-5 shadow-sm sm:gap-6 sm:px-8">
+              {isFull ? (
+                <span className="font-sans text-2xl font-extrabold uppercase leading-tight text-primary sm:text-3xl">
+                  Registration closed
+                </span>
+              ) : remaining !== null ? (
+                <>
+                  <span className="font-sans text-6xl font-extrabold leading-none tracking-tight text-primary sm:text-7xl">
+                    {remaining}
+                  </span>
+                  <span className="font-sans text-base font-extrabold uppercase leading-tight tracking-wide text-on-surface-variant sm:text-lg">
+                    Spots remaining
+                  </span>
+                </>
+              ) : (
+                <span className="font-sans text-base font-extrabold uppercase tracking-wide text-on-surface-variant sm:text-lg">
+                  Loading availability...
+                </span>
+              )}
+            </div>
           </div>
 
           {isFull ? (
