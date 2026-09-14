@@ -1,8 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
-import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DhbeDOCb.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CdOXpDBT.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -206,6 +205,18 @@ var initialState = {
 	building_type: "",
 	building_type_other: ""
 };
+var RAZORPAY_SCRIPT_URL = "https://checkout.razorpay.com/v1/checkout.js";
+function loadRazorpayScript() {
+	if (window.Razorpay) return Promise.resolve();
+	return new Promise((resolve, reject) => {
+		const script = document.createElement("script");
+		script.src = RAZORPAY_SCRIPT_URL;
+		script.async = true;
+		script.onload = () => resolve();
+		script.onerror = () => reject(/* @__PURE__ */ new Error("Failed to load Razorpay checkout script"));
+		document.head.appendChild(script);
+	});
+}
 function RegistrationSection() {
 	const [form, setForm] = (0, import_react.useState)(initialState);
 	const [status, setStatus] = (0, import_react.useState)("idle");
@@ -241,7 +252,7 @@ function RegistrationSection() {
 			setMessage("Please specify your building type.");
 			return;
 		}
-		const payload = {
+		const registrationData = {
 			company_name: form.company_name.trim(),
 			contact_person: form.contact_person.trim(),
 			designation: form.designation.trim(),
@@ -250,39 +261,112 @@ function RegistrationSection() {
 			building_type: form.building_type,
 			building_type_other: form.building_type === "other" ? form.building_type_other.trim() : null
 		};
-		const { error } = await supabase.from("registrations").insert(payload);
-		if (error) {
-			if (error.code === "23505") {
-				setStatus("error");
-				setMessage("This email has already been registered. Each company email can only register once.");
-			} else {
-				setStatus("error");
-				setMessage("Something went wrong. Please try again or contact us directly.");
-			}
+		try {
+			await loadRazorpayScript();
+		} catch {
+			setStatus("error");
+			setMessage("Failed to load payment checkout. Please check your internet connection and try again.");
 			return;
 		}
-		setStatus("success");
-		setMessage("Registration successful! Our engineering team will contact you shortly.");
-		setForm(initialState);
+		if (!window.Razorpay) {
+			setStatus("error");
+			setMessage("Payment checkout failed to initialize. Please try again.");
+			return;
+		}
+		const supabaseUrl = "https://ykwauaijddycdchcibex.supabase.co";
+		const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlrd2F1YWlqZGR5Y2RjaGNpYmV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NjI1NzksImV4cCI6MjEwNDUzODU3OX0.w2lb6rxg_pripaBSlT-ruYKwrRZG2jrX-8e-fLvgaXA";
+		let orderData;
 		try {
-			if (!(await fetch(`https://ykwauaijddycdchcibex.supabase.co/functions/v1/send-registration-email`, {
+			const orderResponse = await fetch(`${supabaseUrl}/functions/v1/create-razorpay-order`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlrd2F1YWlqZGR5Y2RjaGNpYmV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NjI1NzksImV4cCI6MjEwNDUzODU3OX0.w2lb6rxg_pripaBSlT-ruYKwrRZG2jrX-8e-fLvgaXA`
+					Authorization: `Bearer ${supabaseAnonKey}`
+				},
+				body: JSON.stringify({})
+			});
+			if (!orderResponse.ok) {
+				setStatus("error");
+				setMessage("Failed to initiate payment. Please try again.");
+				return;
+			}
+			orderData = await orderResponse.json();
+		} catch {
+			setStatus("error");
+			setMessage("Network error while creating payment order. Please try again.");
+			return;
+		}
+		new window.Razorpay({
+			key: orderData.key_id,
+			amount: orderData.amount,
+			currency: orderData.currency,
+			order_id: orderData.order_id,
+			name: "MAHA BINU Fire Fighters",
+			description: "Synergy 2026 Expo Registration",
+			prefill: {
+				name: registrationData.contact_person,
+				email: registrationData.email,
+				contact: registrationData.mobile_number
+			},
+			theme: { color: "#c51d1d" },
+			handler: (response) => {
+				verifyAndComplete(response, registrationData, supabaseUrl, supabaseAnonKey);
+			},
+			modal: { ondismiss: () => {
+				setStatus("error");
+				setMessage("Payment cancelled. You can try again when ready.");
+			} }
+		}).open();
+	};
+	const verifyAndComplete = async (response, registrationData, supabaseUrl, supabaseAnonKey) => {
+		setStatus("loading");
+		setMessage("");
+		try {
+			const verifyResponse = await fetch(`${supabaseUrl}/functions/v1/verify-razorpay-payment`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${supabaseAnonKey}`
 				},
 				body: JSON.stringify({
-					email: payload.email,
-					company_name: payload.company_name,
-					contact_person: payload.contact_person,
-					designation: payload.designation,
-					mobile_number: payload.mobile_number,
-					building_type: payload.building_type,
-					building_type_other: payload.building_type_other
+					razorpay_order_id: response.razorpay_order_id,
+					razorpay_payment_id: response.razorpay_payment_id,
+					razorpay_signature: response.razorpay_signature,
+					registration: registrationData
 				})
-			})).ok) console.warn("Confirmation email failed to send, but registration was saved.");
+			});
+			if (!verifyResponse.ok) {
+				const errorBody = await verifyResponse.json().catch(() => ({}));
+				setStatus("error");
+				setMessage(errorBody.error ?? "Payment verification failed. Please contact us if you were charged.");
+				return;
+			}
+			setStatus("success");
+			setMessage("Registration successful! Our engineering team will contact you shortly.");
+			setForm(initialState);
+			try {
+				await fetch(`${supabaseUrl}/functions/v1/send-registration-email`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${supabaseAnonKey}`
+					},
+					body: JSON.stringify({
+						email: registrationData.email,
+						company_name: registrationData.company_name,
+						contact_person: registrationData.contact_person,
+						designation: registrationData.designation,
+						mobile_number: registrationData.mobile_number,
+						building_type: registrationData.building_type,
+						building_type_other: registrationData.building_type_other
+					})
+				});
+			} catch {
+				console.warn("Confirmation email failed to send, but registration was saved.");
+			}
 		} catch {
-			console.warn("Confirmation email request failed, but registration was saved.");
+			setStatus("error");
+			setMessage("Network error during payment verification. Please contact us if you were charged.");
 		}
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
@@ -457,11 +541,11 @@ function RegistrationSection() {
 							type: "submit",
 							disabled: status === "loading",
 							className: "mt-2 inline-flex items-center justify-center gap-3 rounded-md bg-primary px-6 py-4 font-sans text-lg font-bold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60",
-							children: status === "loading" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-5 w-5 animate-spin" }), "Registering..."] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClipboardCheck, { className: "h-5 w-5" }), "Register for Free AMC"] })
+							children: status === "loading" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-5 w-5 animate-spin" }), "Processing..."] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClipboardCheck, { className: "h-5 w-5" }), "Register & Pay ₹99"] })
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 							className: "flex items-center justify-center gap-2 font-sans text-sm text-on-surface-variant",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, { className: "h-4 w-4" }), "Your data is securely encrypted."]
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, { className: "h-4 w-4" }), "Secure payment via Razorpay"]
 						})
 					]
 				})]

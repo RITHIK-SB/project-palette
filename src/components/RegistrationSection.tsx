@@ -1,6 +1,37 @@
 import { TriangleAlert, ClipboardCheck, Lock, ChevronDown, CheckCircle2, Loader2 } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
-import { supabase, type RegistrationInput } from "@/lib/supabase";
+import { type RegistrationInput } from "@/lib/supabase";
+
+declare global {
+  interface Window {
+    Razorpay?: new (options: RazorpayOptions) => RazorpayInstance;
+  }
+}
+
+type RazorpayOptions = {
+  key: string;
+  amount: number;
+  currency: string;
+  order_id: string;
+  name: string;
+  description: string;
+  prefill: { name: string; email: string; contact: string };
+  theme: { color: string };
+  handler: (response: RazorpayResponse) => void;
+  modal: {
+    ondismiss: () => void;
+  };
+};
+
+type RazorpayResponse = {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+};
+
+type RazorpayInstance = {
+  open: () => void;
+};
 
 function FieldLabel({ children }: { children: ReactNode }) {
   return (
@@ -34,6 +65,20 @@ const initialState: FormState = {
 };
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
+
+const RAZORPAY_SCRIPT_URL = "https://checkout.razorpay.com/v1/checkout.js";
+
+function loadRazorpayScript(): Promise<void> {
+  if (window.Razorpay) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = RAZORPAY_SCRIPT_URL;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Failed to load Razorpay checkout script"));
+    document.head.appendChild(script);
+  });
+}
 
 export function RegistrationSection() {
   const [form, setForm] = useState<FormState>(initialState);
@@ -76,7 +121,7 @@ export function RegistrationSection() {
       return;
     }
 
-    const payload: RegistrationInput = {
+    const registrationData: RegistrationInput = {
       company_name: form.company_name.trim(),
       contact_person: form.contact_person.trim(),
       designation: form.designation.trim(),
@@ -86,48 +131,138 @@ export function RegistrationSection() {
       building_type_other: form.building_type === "other" ? form.building_type_other.trim() : null,
     };
 
-    const { error } = await supabase.from("registrations").insert(payload);
-
-    if (error) {
-      if (error.code === "23505") {
-        setStatus("error");
-        setMessage("This email has already been registered. Each company email can only register once.");
-      } else {
-        setStatus("error");
-        setMessage("Something went wrong. Please try again or contact us directly.");
-      }
+    try {
+      await loadRazorpayScript();
+    } catch {
+      setStatus("error");
+      setMessage("Failed to load payment checkout. Please check your internet connection and try again.");
       return;
     }
 
-    setStatus("success");
-    setMessage("Registration successful! Our engineering team will contact you shortly.");
-    setForm(initialState);
+    if (!window.Razorpay) {
+      setStatus("error");
+      setMessage("Payment checkout failed to initialize. Please try again.");
+      return;
+    }
+
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+
+    let orderData: { order_id: string; amount: number; currency: string; key_id: string };
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-registration-email`,
-        {
+      const orderResponse = await fetch(`${supabaseUrl}/functions/v1/create-razorpay-order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${supabaseAnonKey}`,
+        },
+        body: JSON.stringify({}),
+      });
+
+      if (!orderResponse.ok) {
+        setStatus("error");
+        setMessage("Failed to initiate payment. Please try again.");
+        return;
+      }
+
+      orderData = await orderResponse.json();
+    } catch {
+      setStatus("error");
+      setMessage("Network error while creating payment order. Please try again.");
+      return;
+    }
+
+    const rzp = new window.Razorpay({
+      key: orderData.key_id,
+      amount: orderData.amount,
+      currency: orderData.currency,
+      order_id: orderData.order_id,
+      name: "MAHA BINU Fire Fighters",
+      description: "Synergy 2026 Expo Registration",
+      prefill: {
+        name: registrationData.contact_person,
+        email: registrationData.email,
+        contact: registrationData.mobile_number,
+      },
+      theme: { color: "#c51d1d" },
+      handler: (response: RazorpayResponse) => {
+        verifyAndComplete(
+          response,
+          registrationData,
+          supabaseUrl,
+          supabaseAnonKey,
+        );
+      },
+      modal: {
+        ondismiss: () => {
+          setStatus("error");
+          setMessage("Payment cancelled. You can try again when ready.");
+        },
+      },
+    });
+
+    rzp.open();
+  };
+
+  const verifyAndComplete = async (
+    response: RazorpayResponse,
+    registrationData: RegistrationInput,
+    supabaseUrl: string,
+    supabaseAnonKey: string,
+  ) => {
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const verifyResponse = await fetch(`${supabaseUrl}/functions/v1/verify-razorpay-payment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${supabaseAnonKey}`,
+        },
+        body: JSON.stringify({
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_signature: response.razorpay_signature,
+          registration: registrationData,
+        }),
+      });
+
+      if (!verifyResponse.ok) {
+        const errorBody = await verifyResponse.json().catch(() => ({}));
+        setStatus("error");
+        setMessage(errorBody.error ?? "Payment verification failed. Please contact us if you were charged.");
+        return;
+      }
+
+      setStatus("success");
+      setMessage("Registration successful! Our engineering team will contact you shortly.");
+      setForm(initialState);
+
+      try {
+        await fetch(`${supabaseUrl}/functions/v1/send-registration-email`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            Authorization: `Bearer ${supabaseAnonKey}`,
           },
           body: JSON.stringify({
-            email: payload.email,
-            company_name: payload.company_name,
-            contact_person: payload.contact_person,
-            designation: payload.designation,
-            mobile_number: payload.mobile_number,
-            building_type: payload.building_type,
-            building_type_other: payload.building_type_other,
+            email: registrationData.email,
+            company_name: registrationData.company_name,
+            contact_person: registrationData.contact_person,
+            designation: registrationData.designation,
+            mobile_number: registrationData.mobile_number,
+            building_type: registrationData.building_type,
+            building_type_other: registrationData.building_type_other,
           }),
-        },
-      );
-      if (!response.ok) {
+        });
+      } catch {
         console.warn("Confirmation email failed to send, but registration was saved.");
       }
     } catch {
-      console.warn("Confirmation email request failed, but registration was saved.");
+      setStatus("error");
+      setMessage("Network error during payment verification. Please contact us if you were charged.");
     }
   };
 
@@ -293,19 +428,19 @@ export function RegistrationSection() {
                 {status === "loading" ? (
                   <>
                     <Loader2 className="h-5 w-5 animate-spin" />
-                    Registering...
+                    Processing...
                   </>
                 ) : (
                   <>
                     <ClipboardCheck className="h-5 w-5" />
-                    Register for Free AMC
+                    Register & Pay ₹99
                   </>
                 )}
               </button>
 
               <p className="flex items-center justify-center gap-2 font-sans text-sm text-on-surface-variant">
                 <Lock className="h-4 w-4" />
-                Your data is securely encrypted.
+                Secure payment via Razorpay
               </p>
             </form>
           )}

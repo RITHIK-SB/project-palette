@@ -16,6 +16,9 @@ export type Registration = {
   building_type_other: string | null;
   status: "pending" | "contacted" | "completed";
   created_at: string;
+  razorpay_order_id: string | null;
+  razorpay_payment_id: string | null;
+  razorpay_payment_verified: boolean;
 };
 
 export type RegistrationInput = {
