@@ -84,7 +84,7 @@ function buildEmailHtml(data: RegistrationData): string {
                 <h1 class="email-title" style="margin:0 0 20px;font-size:29px;line-height:1.2;font-weight:700;color:#1d1d1d;">Registration Confirmed</h1>
                 <p class="email-greeting" style="margin:0 0 36px;font-size:22px;line-height:1.45;color:#555555;">Dear ${escapeHtml(data.contact_person)},</p>
                 <p class="email-intro" style="margin:0 0 34px;font-size:21px;line-height:1.65;color:#555555;">
-                  Thank you for registering for the <strong>Synergy 2026 Expo offer</strong> with MAHA BINU FIRE FIGHTERS. We have received your registration for a free Annual Maintenance Contract (AMC) baseline assessment, and our engineering team will contact you shortly to schedule the initial site visit.
+                  Thank you for registering for the <strong>Synergy 2026 Expo offer</strong> with MAHA BINU FIRE FIGHTERS. We have received your registration for a free baseline inspection, and our engineering team will contact you shortly to schedule the initial site visit.
                 </p>
 
                 <table class="email-details" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid #dfe2e6;border-radius:9px;background-color:#ffffff;">
