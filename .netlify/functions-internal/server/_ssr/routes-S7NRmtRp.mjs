@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CdOXpDBT.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-S7NRmtRp.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -71,7 +71,7 @@ function HeroSection() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "text-foreground",
-							children: "FREE FIRE SAFTEY INSPECTION"
+							children: "FIRE SAFETY INSPECTION"
 						})
 					]
 				}),
@@ -82,7 +82,7 @@ function HeroSection() {
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 					href: "#register",
 					className: "mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90",
-					children: ["Claim Free Inspection", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "h-5 w-5" })]
+					children: ["Register & Pay ₹99", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "h-5 w-5" })]
 				})
 			] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "overflow-hidden rounded-lg border border-border",
@@ -379,7 +379,7 @@ function RegistrationSection() {
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 						className: "text-balance font-sans text-3xl font-bold tracking-tight text-foreground md:text-[32px]",
-						children: "Activate Your Free Maintenance Assessment"
+						children: "Activate Your Maintenance Assessment"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-5 max-w-md text-pretty font-sans text-base leading-relaxed text-on-surface-variant",

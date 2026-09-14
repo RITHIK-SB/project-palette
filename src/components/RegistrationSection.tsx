@@ -272,7 +272,7 @@ export function RegistrationSection() {
         {/* Left copy */}
         <div className="md:pt-8">
           <h2 className="text-balance font-sans text-3xl font-bold tracking-tight text-foreground md:text-[32px]">
-            Activate Your Free Maintenance Assessment
+            Activate Your Maintenance Assessment
           </h2>
           <p className="mt-5 max-w-md text-pretty font-sans text-base leading-relaxed text-on-surface-variant">
             Complete the registration form to lock in your exclusive Synergy 2026 Expo offer. Our

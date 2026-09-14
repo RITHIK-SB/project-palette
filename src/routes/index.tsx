@@ -10,20 +10,20 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Free AMC Registration | MAHA BINU Fire Fighters" },
+      { title: "AMC Registration | MAHA BINU Fire Fighters" },
       {
         name: "description",
         content:
-          "Register during Expo 2026 to receive a complimentary Annual Maintenance Contract assessment for your fire safety systems from industry leading experts.",
+          "Register during Expo 2026 to receive an Annual Maintenance Contract assessment for your fire safety systems from industry leading experts.",
       },
       {
         property: "og:title",
-        content: "Free AMC Registration | MAHA BINU Fire Fighters",
+        content: "AMC Registration | MAHA BINU Fire Fighters",
       },
       {
         property: "og:description",
         content:
-          "Register during Expo 2026 to receive a complimentary Annual Maintenance Contract assessment for your fire safety systems from industry leading experts.",
+          "Register during Expo 2026 to receive an Annual Maintenance Contract assessment for your fire safety systems from industry leading experts.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

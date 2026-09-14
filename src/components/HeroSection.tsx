@@ -8,7 +8,7 @@ export function HeroSection() {
           <h1 className="text-balance font-sans text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground md:text-5xl">
             <span className="text-primary">Secure Your Facility.</span>
             <br />
-            <span className="text-foreground">FREE FIRE SAFTEY INSPECTION</span>
+            <span className="text-foreground">FIRE SAFETY INSPECTION</span>
           </h1>
           <p className="mt-6 max-w-md text-pretty font-sans text-lg leading-relaxed text-on-surface-variant">
             Our certified technicians will visit your facility to perform a thorough, complimentary
@@ -18,7 +18,7 @@ export function HeroSection() {
             href="#register"
             className="mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Claim Free Inspection
+            Register & Pay ₹99
             <ArrowRight className="h-5 w-5" />
           </a>
         </div>
