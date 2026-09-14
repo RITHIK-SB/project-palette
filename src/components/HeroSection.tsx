@@ -1,6 +1,9 @@
 import { ArrowRight } from "lucide-react";
+import { useRemainingSpots } from "@/hooks/use-remaining-spots";
 
 export function HeroSection() {
+  const { remaining, isFull, MAX_REGISTRATIONS } = useRemainingSpots();
+
   return (
     <section id="plans" className="bg-surface-container">
       <div className="mx-auto grid max-w-[1280px] items-center gap-10 px-4 py-16 md:grid-cols-2 md:gap-12 md:px-12 md:py-20">
@@ -14,13 +17,42 @@ export function HeroSection() {
             Our certified technicians will visit your facility to perform a thorough, complimentary
             inspection of your fire protection systems
           </p>
-          <a
-            href="#register"
-            className="mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Claim Your Inspection
-            <ArrowRight className="h-5 w-5" />
-          </a>
+
+          <div className="mt-5 inline-flex flex-col gap-0.5">
+            <span className="font-sans text-sm font-bold uppercase tracking-wide text-primary">
+              Limited to first {MAX_REGISTRATIONS} registrations
+            </span>
+            {isFull ? (
+              <span className="font-sans text-lg font-extrabold text-primary">
+                REGISTRATION CLOSED
+              </span>
+            ) : remaining !== null ? (
+              <span className="font-sans text-lg font-extrabold text-foreground">
+                {remaining} spots remaining
+              </span>
+            ) : (
+              <span className="font-sans text-lg font-extrabold text-on-surface-variant">
+                Loading availability...
+              </span>
+            )}
+          </div>
+
+          {isFull ? (
+            <button
+              disabled
+              className="mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground opacity-60 cursor-not-allowed"
+            >
+              REGISTRATION CLOSED
+            </button>
+          ) : (
+            <a
+              href="#register"
+              className="mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Claim Your Inspection
+              <ArrowRight className="h-5 w-5" />
+            </a>
+          )}
         </div>
 
         <div className="overflow-hidden rounded-lg border border-border">

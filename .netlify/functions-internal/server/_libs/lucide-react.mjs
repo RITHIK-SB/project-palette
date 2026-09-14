@@ -128,6 +128,21 @@ var ArrowRight = createLucideIcon("arrow-right", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var Ban = createLucideIcon("ban", [["circle", {
+	cx: "12",
+	cy: "12",
+	r: "10",
+	key: "1mglay"
+}], ["path", {
+	d: "M4.929 4.929 19.07 19.071",
+	key: "196cmz"
+}]]);
+/**
+* @license lucide-react v0.575.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Briefcase = createLucideIcon("briefcase", [["path", {
 	d: "M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16",
 	key: "jecpp"
@@ -394,4 +409,4 @@ var User = createLucideIcon("user", [["path", {
 	key: "17ys0d"
 }]]);
 //#endregion
-export { ArrowRight as _, Phone as a, Lock as c, ClipboardCheck as d, CircleCheck as f, Briefcase as g, Building2 as h, Search as i, LoaderCircle as l, Calendar as m, TriangleAlert as n, Mail as o, ChevronDown as p, ShieldCheck as r, LogOut as s, User as t, Headphones as u };
+export { Ban as _, Phone as a, Lock as c, ClipboardCheck as d, CircleCheck as f, Briefcase as g, Building2 as h, Search as i, LoaderCircle as l, Calendar as m, TriangleAlert as n, Mail as o, ChevronDown as p, ShieldCheck as r, LogOut as s, User as t, Headphones as u, ArrowRight as v };

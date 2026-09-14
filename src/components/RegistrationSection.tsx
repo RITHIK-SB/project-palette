@@ -1,6 +1,7 @@
-import { TriangleAlert, ClipboardCheck, Lock, ChevronDown, CheckCircle2, Loader2 } from "lucide-react";
+import { TriangleAlert, ClipboardCheck, Lock, ChevronDown, CheckCircle2, Loader2, Ban } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { type RegistrationInput } from "@/lib/supabase";
+import { useRemainingSpots } from "@/hooks/use-remaining-spots";
 
 declare global {
   interface Window {
@@ -85,6 +86,7 @@ export function RegistrationSection() {
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [message, setMessage] = useState("");
   const isOther = form.building_type === "other";
+  const { isFull, MAX_REGISTRATIONS } = useRemainingSpots();
 
   const update = (field: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -161,8 +163,13 @@ export function RegistrationSection() {
       });
 
       if (!orderResponse.ok) {
+        const errorBody = await orderResponse.json().catch(() => ({}));
         setStatus("error");
-        setMessage("Failed to initiate payment. Please try again.");
+        if (orderResponse.status === 409) {
+          setMessage(errorBody.error ?? "All 99 registration spots have been claimed.");
+        } else {
+          setMessage("Failed to initiate payment. Please try again.");
+        }
         return;
       }
 
@@ -313,6 +320,14 @@ export function RegistrationSection() {
               >
                 Register Another Company
               </button>
+            </div>
+          ) : isFull ? (
+            <div className="flex flex-col items-center gap-4 p-8 text-center">
+              <Ban className="h-16 w-16 text-primary" />
+              <h3 className="font-sans text-2xl font-bold text-foreground">Registration Closed</h3>
+              <p className="max-w-sm font-sans text-base leading-relaxed text-on-surface-variant">
+                All {MAX_REGISTRATIONS} registration spots have been claimed. Thank you for your interest.
+              </p>
             </div>
           ) : (
             <form className="flex flex-col gap-6 p-6 md:p-8" onSubmit={handleSubmit}>

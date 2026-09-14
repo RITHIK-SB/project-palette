@@ -1,3 +1,5 @@
+import { createClient } from "npm:@supabase/supabase-js@2";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -26,6 +28,33 @@ Deno.serve(async (req: Request) => {
     if (!keyId || !keySecret) {
       return new Response(JSON.stringify({ error: "Razorpay credentials not configured" }), {
         status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    if (!supabaseUrl || !serviceRoleKey) {
+      return new Response(JSON.stringify({ error: "Server configuration error" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const supabase = createClient(supabaseUrl, serviceRoleKey);
+
+    const { data: remaining, error: countError } = await supabase.rpc("get_remaining_spots");
+
+    if (countError) {
+      return new Response(JSON.stringify({ error: "Failed to check registration availability" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if ((remaining as number) <= 0) {
+      return new Response(JSON.stringify({ error: "Registration is full. All 99 spots have been claimed." }), {
+        status: 409,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }

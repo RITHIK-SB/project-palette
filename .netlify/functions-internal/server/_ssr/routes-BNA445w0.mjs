@@ -1,7 +1,8 @@
 import { r as __toESM } from "../_runtime.mjs";
+import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-import { _ as ArrowRight, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-C2xr2qbF.js
+import { _ as Ban, c as Lock, d as ClipboardCheck, f as CircleCheck, l as LoaderCircle, n as TriangleAlert, p as ChevronDown, r as ShieldCheck, u as Headphones, v as ArrowRight } from "../_libs/lucide-react.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BNA445w0.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -54,7 +55,36 @@ function SiteHeader() {
 		})
 	});
 }
+var MAX_REGISTRATIONS = 99;
+function useRemainingSpots() {
+	const [remaining, setRemaining] = (0, import_react.useState)(null);
+	const [isFull, setIsFull] = (0, import_react.useState)(false);
+	(0, import_react.useEffect)(() => {
+		let cancelled = false;
+		async function fetchRemaining() {
+			const { data, error } = await supabase.rpc("get_remaining_spots");
+			if (cancelled) return;
+			if (error) {
+				setRemaining(null);
+				return;
+			}
+			const value = data;
+			setRemaining(value);
+			setIsFull(value <= 0);
+		}
+		fetchRemaining();
+		return () => {
+			cancelled = true;
+		};
+	}, []);
+	return {
+		remaining,
+		isFull,
+		MAX_REGISTRATIONS
+	};
+}
 function HeroSection() {
+	const { remaining, isFull, MAX_REGISTRATIONS } = useRemainingSpots();
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 		id: "plans",
 		className: "bg-surface-container",
@@ -79,7 +109,31 @@ function HeroSection() {
 					className: "mt-6 max-w-md text-pretty font-sans text-lg leading-relaxed text-on-surface-variant",
 					children: "Our certified technicians will visit your facility to perform a thorough, complimentary inspection of your fire protection systems"
 				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "mt-5 inline-flex flex-col gap-0.5",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "font-sans text-sm font-bold uppercase tracking-wide text-primary",
+						children: [
+							"Limited to first ",
+							MAX_REGISTRATIONS,
+							" registrations"
+						]
+					}), isFull ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "font-sans text-lg font-extrabold text-primary",
+						children: "REGISTRATION CLOSED"
+					}) : remaining !== null ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "font-sans text-lg font-extrabold text-foreground",
+						children: [remaining, " spots remaining"]
+					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "font-sans text-lg font-extrabold text-on-surface-variant",
+						children: "Loading availability..."
+					})]
+				}),
+				isFull ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+					disabled: true,
+					className: "mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground opacity-60 cursor-not-allowed",
+					children: "REGISTRATION CLOSED"
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 					href: "#register",
 					className: "mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90",
 					children: ["Claim Your Inspection", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "h-5 w-5" })]
@@ -222,6 +276,7 @@ function RegistrationSection() {
 	const [status, setStatus] = (0, import_react.useState)("idle");
 	const [message, setMessage] = (0, import_react.useState)("");
 	const isOther = form.building_type === "other";
+	const { isFull, MAX_REGISTRATIONS } = useRemainingSpots();
 	const update = (field, value) => {
 		setForm((prev) => ({
 			...prev,
@@ -286,8 +341,10 @@ function RegistrationSection() {
 				body: JSON.stringify({})
 			});
 			if (!orderResponse.ok) {
+				const errorBody = await orderResponse.json().catch(() => ({}));
 				setStatus("error");
-				setMessage("Failed to initiate payment. Please try again.");
+				if (orderResponse.status === 409) setMessage(errorBody.error ?? "All 99 registration spots have been claimed.");
+				else setMessage("Failed to initiate payment. Please try again.");
 				return;
 			}
 			orderData = await orderResponse.json();
@@ -424,6 +481,23 @@ function RegistrationSection() {
 							},
 							className: "mt-2 inline-flex items-center justify-center rounded-md border-2 border-input bg-card px-6 py-3 font-sans text-base font-bold text-foreground transition-colors hover:bg-surface",
 							children: "Register Another Company"
+						})
+					]
+				}) : isFull ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex flex-col items-center gap-4 p-8 text-center",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Ban, { className: "h-16 w-16 text-primary" }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							className: "font-sans text-2xl font-bold text-foreground",
+							children: "Registration Closed"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							className: "max-w-sm font-sans text-base leading-relaxed text-on-surface-variant",
+							children: [
+								"All ",
+								MAX_REGISTRATIONS,
+								" registration spots have been claimed. Thank you for your interest."
+							]
 						})
 					]
 				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {

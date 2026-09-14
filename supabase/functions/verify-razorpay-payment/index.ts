@@ -107,24 +107,32 @@ Deno.serve(async (req: Request) => {
 
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
-    const { error: insertError } = await supabase.from("registrations").insert({
-      email: registration.email.trim().toLowerCase(),
-      company_name: registration.company_name.trim(),
-      contact_person: registration.contact_person.trim(),
-      designation: registration.designation.trim(),
-      mobile_number: registration.mobile_number.trim(),
-      building_type: registration.building_type,
-      building_type_other:
+    const { error: rpcError } = await supabase.rpc("try_claim_registration_slot", {
+      p_email: registration.email.trim().toLowerCase(),
+      p_company_name: registration.company_name.trim(),
+      p_contact_person: registration.contact_person.trim(),
+      p_designation: registration.designation.trim(),
+      p_mobile_number: registration.mobile_number.trim(),
+      p_building_type: registration.building_type,
+      p_building_type_other:
         registration.building_type === "other"
           ? (registration.building_type_other?.trim() ?? null)
           : null,
-      razorpay_order_id,
-      razorpay_payment_id,
-      razorpay_payment_verified: true,
+      p_razorpay_order_id: razorpay_order_id,
+      p_razorpay_payment_id: razorpay_payment_id,
     });
 
-    if (insertError) {
-      if (insertError.code === "23505") {
+    if (rpcError) {
+      if (rpcError.message?.includes("REGISTRATION_FULL")) {
+        return new Response(
+          JSON.stringify({ error: "Registration is full. All 99 spots have been claimed." }),
+          {
+            status: 409,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          },
+        );
+      }
+      if (rpcError.code === "23505") {
         return new Response(
           JSON.stringify({ error: "This email has already been registered." }),
           {
@@ -134,7 +142,7 @@ Deno.serve(async (req: Request) => {
         );
       }
       return new Response(
-        JSON.stringify({ error: "Failed to save registration", details: insertError.message }),
+        JSON.stringify({ error: "Failed to save registration", details: rpcError.message }),
         {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
