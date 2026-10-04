@@ -418,5 +418,18 @@ var User = createLucideIcon("user", [["path", {
 	r: "4",
 	key: "17ys0d"
 }]]);
+/**
+* @license lucide-react v0.575.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var X = createLucideIcon("x", [["path", {
+	d: "M18 6 6 18",
+	key: "1bl5f8"
+}], ["path", {
+	d: "m6 6 12 12",
+	key: "d8bk6v"
+}]]);
 //#endregion
-export { Briefcase as _, Phone as a, Lock as c, Flame as d, ClipboardCheck as f, Building2 as g, Calendar as h, Search as i, LoaderCircle as l, ChevronDown as m, TriangleAlert as n, Mail as o, CircleCheck as p, ShieldCheck as r, LogOut as s, User as t, Headphones as u, Ban as v, ArrowRight as y };
+export { Building2 as _, Search as a, ArrowRight as b, LogOut as c, Headphones as d, Flame as f, Calendar as g, ChevronDown as h, ShieldCheck as i, Lock as l, CircleCheck as m, User as n, Phone as o, ClipboardCheck as p, TriangleAlert as r, Mail as s, X as t, LoaderCircle as u, Briefcase as v, Ban as y };

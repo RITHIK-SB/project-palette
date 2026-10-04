@@ -39,6 +39,7 @@ export function SiteHeader() {
 
         <a
           href="https://www.mahabinufirefighters.com/contact-us/#wpcf7-f184-p22-o1"
+          data-tour="contact"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex shrink-0 items-center justify-center rounded-md bg-secondary px-3 py-1.5 font-sans text-xs font-bold text-secondary-foreground transition-colors hover:bg-secondary/90 md:px-5 md:py-2.5 md:text-sm"

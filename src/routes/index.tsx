@@ -5,6 +5,7 @@ import { WhyChooseSection } from "@/components/WhyChooseSection";
 import { QuoteBanner } from "@/components/QuoteBanner";
 import { RegistrationSection } from "@/components/RegistrationSection";
 import { SiteFooter } from "@/components/SiteFooter";
+import { WebsiteTour } from "@/components/WebsiteTour";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -42,6 +43,7 @@ function Index() {
         <RegistrationSection />
       </main>
       <SiteFooter />
+      <WebsiteTour />
     </div>
   );
 }

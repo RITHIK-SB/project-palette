@@ -25,7 +25,7 @@ export function HeroSection() {
     Limited to first {MAX_REGISTRATIONS} registrations
   </div>
 
-  <div className="flex h-[120px] w-[355px] max-w-full items-center rounded-lg border border-outline-variant border-t-4 border-t-primary bg-card px-7 shadow-md">
+  <div data-tour="status" className="flex h-[120px] w-[355px] max-w-full items-center rounded-lg border border-outline-variant border-t-4 border-t-primary bg-card px-7 shadow-md">
     {isFull ? (
       <span className="font-sans text-2xl font-extrabold uppercase leading-tight text-primary sm:text-3xl">
         Registration closed
@@ -58,6 +58,7 @@ export function HeroSection() {
           ) : (
             <a
               href="#register"
+              data-tour="register"
               className="mt-7 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90"
             >
               Claim Your Inspection

@@ -1,8 +1,8 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-import { c as Lock, d as Flame, f as ClipboardCheck, l as LoaderCircle, m as ChevronDown, n as TriangleAlert, p as CircleCheck, r as ShieldCheck, u as Headphones, v as Ban, y as ArrowRight } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-Cs11fVs7.js
+import { b as ArrowRight, d as Headphones, f as Flame, h as ChevronDown, i as ShieldCheck, l as Lock, m as CircleCheck, p as ClipboardCheck, r as TriangleAlert, t as X, u as LoaderCircle, y as Ban } from "../_libs/lucide-react.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DPBnBkUn.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -46,6 +46,7 @@ function SiteHeader() {
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
 					href: "https://www.mahabinufirefighters.com/contact-us/#wpcf7-f184-p22-o1",
+					"data-tour": "contact",
 					target: "_blank",
 					rel: "noopener noreferrer",
 					className: "inline-flex shrink-0 items-center justify-center rounded-md bg-secondary px-3 py-1.5 font-sans text-xs font-bold text-secondary-foreground transition-colors hover:bg-secondary/90 md:px-5 md:py-2.5 md:text-sm",
@@ -89,7 +90,7 @@ function HeroSection() {
 		id: "plans",
 		className: "bg-surface-container",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "mx-auto grid max-w-[1280px] items-center gap-10 px-4 py-16 md:grid-cols-2 md:gap-12 md:px-12 md:py-20",
+			className: "mx-auto grid max-w-[1280px] items-center gap-8 px-4 py-12 md:grid-cols-2 md:gap-12 md:px-12 md:py-16",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
 					className: "text-balance font-sans text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground md:text-5xl",
@@ -106,8 +107,8 @@ function HeroSection() {
 					]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "mt-6 max-w-md text-pretty font-sans text-lg leading-relaxed text-on-surface-variant",
-					children: "Our certified technicians will visit your facility to perform a thorough, complimentary inspection of your fire protection systems"
+					className: "mt-5 max-w-md text-pretty font-sans text-lg leading-relaxed text-on-surface-variant",
+					children: "Our certified technicians will visit your facility to perform a thorough inspection of your fire protection systems"
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "mt-6 flex w-full max-w-md flex-col gap-4",
@@ -123,15 +124,16 @@ function HeroSection() {
 							" registrations"
 						]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "flex min-h-[120px] w-[350px] max-w-full items-center gap-5 rounded-xl border border-primary/25 border-t-4 bg-card px-7 py-5 shadow-sm sm:gap-6 sm:px-8",
+						"data-tour": "status",
+						className: "flex h-[120px] w-[355px] max-w-full items-center rounded-lg border border-outline-variant border-t-4 border-t-primary bg-card px-7 shadow-md",
 						children: isFull ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "font-sans text-2xl font-extrabold uppercase leading-tight text-primary sm:text-3xl",
 							children: "Registration closed"
 						}) : remaining !== null ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-sans text-6xl font-extrabold leading-none tracking-tight text-primary sm:text-7xl",
+							className: "font-sans text-6xl font-extrabold leading-none text-primary sm:text-7xl",
 							children: remaining
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-sans text-base font-extrabold uppercase leading-tight tracking-wide text-on-surface-variant sm:text-lg",
+							className: "ml-5 font-sans text-base font-extrabold uppercase leading-tight tracking-wide text-on-surface-variant sm:text-lg",
 							children: "Spots remaining"
 						})] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "font-sans text-base font-extrabold uppercase tracking-wide text-on-surface-variant sm:text-lg",
@@ -141,11 +143,12 @@ function HeroSection() {
 				}),
 				isFull ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 					disabled: true,
-					className: "mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground opacity-60 cursor-not-allowed",
+					className: "mt-7 inline-flex cursor-not-allowed items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground opacity-60",
 					children: "REGISTRATION CLOSED"
 				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 					href: "#register",
-					className: "mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90",
+					"data-tour": "register",
+					className: "mt-7 inline-flex items-center gap-3 rounded-md bg-primary px-7 py-4 font-sans text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90",
 					children: ["Claim Your Inspection", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "h-5 w-5" })]
 				})
 			] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -623,6 +626,7 @@ function RegistrationSection() {
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 							type: "submit",
+							"data-tour": "payment",
 							disabled: status === "loading",
 							className: "mt-2 inline-flex items-center justify-center gap-3 rounded-md bg-primary px-6 py-4 font-sans text-lg font-bold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60",
 							children: status === "loading" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-5 w-5 animate-spin" }), "Processing..."] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClipboardCheck, { className: "h-5 w-5" }), "Register & Pay ₹99"] })
@@ -680,6 +684,232 @@ function SiteFooter() {
 		})
 	});
 }
+var TOUR_STORAGE_KEY = "hasSeenWebsiteTour";
+var steps = [
+	{
+		target: "register",
+		title: "Register Now",
+		description: "Start your registration here."
+	},
+	{
+		target: "payment",
+		title: "Payment",
+		description: "Complete your registration securely through Razorpay."
+	},
+	{
+		target: "status",
+		title: "Registration Status",
+		description: "Check your registration status and details here."
+	},
+	{
+		target: "contact",
+		title: "Contact Us",
+		description: "Need help? Reach our team directly."
+	}
+];
+function getTarget(target) {
+	return document.querySelector(`[data-tour="${target}"]`);
+}
+function getTargetRect(element) {
+	const rect = element.getBoundingClientRect();
+	return {
+		top: rect.top,
+		left: rect.left,
+		width: rect.width,
+		height: rect.height
+	};
+}
+function WebsiteTour() {
+	const [stepIndex, setStepIndex] = (0, import_react.useState)(null);
+	const [targetRect, setTargetRect] = (0, import_react.useState)(null);
+	const [tooltipStyle, setTooltipStyle] = (0, import_react.useState)({});
+	const tooltipRef = (0, import_react.useRef)(null);
+	const previousTargetRef = (0, import_react.useRef)(null);
+	const previousTargetStylesRef = (0, import_react.useRef)({
+		position: "",
+		zIndex: "",
+		scrollMarginTop: ""
+	});
+	const isActive = stepIndex !== null;
+	const currentStep = stepIndex === null ? null : steps[stepIndex];
+	const closeTour = () => {
+		window.localStorage.setItem(TOUR_STORAGE_KEY, "true");
+		setStepIndex(null);
+	};
+	(0, import_react.useEffect)(() => {
+		try {
+			if (window.localStorage.getItem(TOUR_STORAGE_KEY) !== "true") {
+				const timer = window.setTimeout(() => setStepIndex(0), 350);
+				return () => window.clearTimeout(timer);
+			}
+		} catch {
+			const timer = window.setTimeout(() => setStepIndex(0), 350);
+			return () => window.clearTimeout(timer);
+		}
+	}, []);
+	(0, import_react.useEffect)(() => {
+		if (!isActive) return;
+		const handleKeyDown = (event) => {
+			if (event.key === "Escape") closeTour();
+		};
+		document.addEventListener("keydown", handleKeyDown);
+		return () => document.removeEventListener("keydown", handleKeyDown);
+	}, [isActive]);
+	(0, import_react.useEffect)(() => {
+		if (!isActive || !currentStep) return;
+		let retryCount = 0;
+		let retryTimer;
+		const updatePosition = () => {
+			const target = getTarget(currentStep.target);
+			if (!target) {
+				if (retryCount < 10) {
+					retryCount += 1;
+					retryTimer = window.setTimeout(updatePosition, 100);
+				}
+				return;
+			}
+			if (previousTargetRef.current !== target) {
+				if (previousTargetRef.current) {
+					previousTargetRef.current.style.position = previousTargetStylesRef.current.position;
+					previousTargetRef.current.style.zIndex = previousTargetStylesRef.current.zIndex;
+					previousTargetRef.current.style.scrollMarginTop = previousTargetStylesRef.current.scrollMarginTop;
+				}
+				previousTargetStylesRef.current = {
+					position: target.style.position,
+					zIndex: target.style.zIndex,
+					scrollMarginTop: target.style.scrollMarginTop
+				};
+				previousTargetRef.current = target;
+				target.style.position = target.style.position || "relative";
+				target.style.zIndex = "60";
+				target.style.scrollMarginTop = "96px";
+			}
+			const rect = getTargetRect(target);
+			setTargetRect(rect);
+			target.scrollIntoView({
+				block: "nearest",
+				behavior: "smooth"
+			});
+		};
+		updatePosition();
+		window.addEventListener("resize", updatePosition);
+		window.addEventListener("scroll", updatePosition, true);
+		return () => {
+			if (retryTimer) window.clearTimeout(retryTimer);
+			window.removeEventListener("resize", updatePosition);
+			window.removeEventListener("scroll", updatePosition, true);
+		};
+	}, [currentStep, isActive]);
+	(0, import_react.useEffect)(() => {
+		if (!isActive || !targetRect || !tooltipRef.current) return;
+		const tooltip = tooltipRef.current.getBoundingClientRect();
+		const gap = 16;
+		const margin = 16;
+		const belowTop = targetRect.top + targetRect.height + gap;
+		const aboveTop = targetRect.top - tooltip.height - gap;
+		const top = belowTop + tooltip.height <= window.innerHeight - margin ? belowTop : aboveTop >= margin ? aboveTop : Math.max(margin, window.innerHeight - tooltip.height - margin);
+		const left = Math.min(Math.max(margin, targetRect.left + targetRect.width / 2 - tooltip.width / 2), window.innerWidth - tooltip.width - margin);
+		setTooltipStyle({
+			top,
+			left
+		});
+	}, [targetRect, stepIndex]);
+	(0, import_react.useEffect)(() => {
+		return () => {
+			if (previousTargetRef.current) {
+				previousTargetRef.current.style.position = previousTargetStylesRef.current.position;
+				previousTargetRef.current.style.zIndex = previousTargetStylesRef.current.zIndex;
+				previousTargetRef.current.style.scrollMarginTop = previousTargetStylesRef.current.scrollMarginTop;
+			}
+		};
+	}, [isActive]);
+	if (!isActive || !currentStep || !targetRect) return null;
+	const goBack = () => setStepIndex((current) => current === null ? null : Math.max(0, current - 1));
+	const goNext = () => {
+		if (stepIndex === steps.length - 1) {
+			closeTour();
+			return;
+		}
+		setStepIndex((current) => current === null ? 0 : current + 1);
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "fixed inset-0 z-40",
+		"aria-label": "Website tour",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "absolute inset-0 bg-foreground/60",
+				"aria-hidden": "true"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "pointer-events-none absolute rounded-lg ring-2 ring-white/90 transition-[top,left,width,height] duration-200 motion-reduce:transition-none",
+				style: {
+					top: targetRect.top - 8,
+					left: targetRect.left - 8,
+					width: targetRect.width + 16,
+					height: targetRect.height + 16,
+					boxShadow: "0 0 0 9999px rgb(0 0 0 / 0.58)"
+				},
+				"aria-hidden": "true"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				ref: tooltipRef,
+				role: "dialog",
+				"aria-modal": "true",
+				"aria-labelledby": "website-tour-title",
+				className: "absolute w-[min(360px,calc(100vw-32px))] rounded-xl border border-border bg-card p-5 text-foreground shadow-2xl transition-[top,left] duration-200 motion-reduce:transition-none",
+				style: tooltipStyle,
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						type: "button",
+						onClick: closeTour,
+						"aria-label": "Close website tour",
+						className: "absolute right-3 top-3 rounded-md p-1 text-on-surface-variant transition-colors hover:bg-surface hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { className: "h-4 w-4" })
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						className: "pr-6 font-sans text-xs font-bold uppercase tracking-[0.12em] text-primary",
+						children: [
+							stepIndex + 1,
+							" of ",
+							steps.length
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						id: "website-tour-title",
+						className: "mt-2 font-sans text-xl font-bold leading-tight",
+						children: currentStep.title
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-2 font-sans text-sm leading-relaxed text-on-surface-variant",
+						children: currentStep.description
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mt-5 flex items-center justify-between gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							onClick: closeTour,
+							className: "rounded-md px-2 py-2 font-sans text-sm font-semibold text-on-surface-variant transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary",
+							children: "Skip Tour"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-2",
+							children: [stepIndex > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								onClick: goBack,
+								className: "rounded-md border border-border px-3 py-2 font-sans text-sm font-bold text-foreground transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary",
+								children: "Back"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								onClick: goNext,
+								className: "rounded-md bg-primary px-4 py-2 font-sans text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary",
+								children: stepIndex === steps.length - 1 ? "Finish" : "Next"
+							})]
+						})]
+					})
+				]
+			})
+		]
+	});
+}
 function Index() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "min-h-screen bg-surface",
@@ -694,7 +924,8 @@ function Index() {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RegistrationSection, {})
 				]
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SiteFooter, {})
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SiteFooter, {}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WebsiteTour, {})
 		]
 	});
 }

@@ -437,6 +437,7 @@ export function RegistrationSection() {
 
               <button
                 type="submit"
+                data-tour="payment"
                 disabled={status === "loading"}
                 className="mt-2 inline-flex items-center justify-center gap-3 rounded-md bg-primary px-6 py-4 font-sans text-lg font-bold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
               >

@@ -1,20 +1,20 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-l7TMkwHv.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-BXrZ7svC.js
 var tsrStartManifest = () => ({ routes: {
 	__root__: {
 		filePath: "/tmp/cc-agent/70809999/project/src/routes/__root.tsx",
 		children: ["/", "/admin"],
-		preloads: ["/assets/index-Bja73FkC.js", "/assets/supabase-S0QJyxR7.js"],
+		preloads: ["/assets/index-CiOXKFsv.js", "/assets/supabase-S0QJyxR7.js"],
 		scripts: [{ attrs: {
 			type: "module",
 			async: !0,
-			src: "/assets/index-Bja73FkC.js"
+			src: "/assets/index-CiOXKFsv.js"
 		} }]
 	},
 	"/": {
 		filePath: "/tmp/cc-agent/70809999/project/src/routes/index.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/routes-CIjb7xlY.js",
+			"/assets/routes-DIblSG7I.js",
 			"/assets/createLucideIcon-DsRxaOK2.js",
 			"/assets/triangle-alert-CyICWKz9.js"
 		]
@@ -23,7 +23,7 @@ var tsrStartManifest = () => ({ routes: {
 		filePath: "/tmp/cc-agent/70809999/project/src/routes/admin.tsx",
 		children: ["/admin/login"],
 		preloads: [
-			"/assets/admin-D8VZ3ijT.js",
+			"/assets/admin-CE-4hQX5.js",
 			"/assets/createLucideIcon-DsRxaOK2.js",
 			"/assets/mail-C5EyUJ1Q.js"
 		]
@@ -31,7 +31,7 @@ var tsrStartManifest = () => ({ routes: {
 	"/admin/login": {
 		filePath: "/tmp/cc-agent/70809999/project/src/routes/admin/login.tsx",
 		children: void 0,
-		preloads: ["/assets/login-nlU93nlh.js", "/assets/triangle-alert-CyICWKz9.js"]
+		preloads: ["/assets/login-D6esXdEo.js", "/assets/triangle-alert-CyICWKz9.js"]
 	}
 } });
 //#endregion
