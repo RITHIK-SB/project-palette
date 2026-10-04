@@ -255,13 +255,7 @@ export function RegistrationSection() {
             Authorization: `Bearer ${supabaseAnonKey}`,
           },
           body: JSON.stringify({
-            email: registrationData.email,
-            company_name: registrationData.company_name,
-            contact_person: registrationData.contact_person,
-            designation: registrationData.designation,
-            mobile_number: registrationData.mobile_number,
-            building_type: registrationData.building_type,
-            building_type_other: registrationData.building_type_other,
+            razorpay_payment_id: response.razorpay_payment_id,
           }),
         });
       } catch {

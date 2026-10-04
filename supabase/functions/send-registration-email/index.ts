@@ -1,3 +1,5 @@
+import { createClient } from "npm:@supabase/supabase-js@2";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -22,6 +24,10 @@ type RegistrationData = {
   mobile_number: string;
   building_type: string;
   building_type_other?: string | null;
+};
+
+type EmailRequest = {
+  razorpay_payment_id: string;
 };
 
 function buildEmailHtml(data: RegistrationData): string {
@@ -165,11 +171,51 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const data = await req.json() as RegistrationData;
+    const { razorpay_payment_id } = await req.json() as EmailRequest;
 
-    if (!data?.email) {
-      return new Response(JSON.stringify({ error: "Email is required" }), {
+    if (!razorpay_payment_id) {
+      return new Response(JSON.stringify({ error: "Payment ID is required" }), {
         status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    if (!supabaseUrl || !serviceRoleKey) {
+      return new Response(JSON.stringify({ error: "Server configuration error" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const supabase = createClient(supabaseUrl, serviceRoleKey);
+
+    // Look up the registration by its Razorpay payment ID and verify it was paid.
+    // This prevents sending emails for nonexistent, unpaid, or unverified registrations.
+    const { data: registration, error: dbError } = await supabase
+      .from("registrations")
+      .select("email, company_name, contact_person, designation, mobile_number, building_type, building_type_other, razorpay_payment_verified")
+      .eq("razorpay_payment_id", razorpay_payment_id)
+      .maybeSingle();
+
+    if (dbError) {
+      return new Response(JSON.stringify({ error: "Failed to look up registration" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!registration) {
+      return new Response(JSON.stringify({ error: "Registration not found for this payment." }), {
+        status: 404,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!registration.razorpay_payment_verified) {
+      return new Response(JSON.stringify({ error: "Registration is not verified." }), {
+        status: 403,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
@@ -182,7 +228,17 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const html = buildEmailHtml(data);
+    const emailData: RegistrationData = {
+      email: registration.email,
+      company_name: registration.company_name,
+      contact_person: registration.contact_person,
+      designation: registration.designation,
+      mobile_number: registration.mobile_number,
+      building_type: registration.building_type,
+      building_type_other: registration.building_type_other,
+    };
+
+    const html = buildEmailHtml(emailData);
 
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -192,7 +248,7 @@ Deno.serve(async (req: Request) => {
       },
       body: JSON.stringify({
         from: "MAHA BINU Fire Fighters <noreply@mahabinuamc.com>",
-        to: [data.email],
+        to: [emailData.email],
         subject: "Registration Confirmed — MAHA BINU Fire Fighters | Synergy 2026 Expo",
         html,
       }),

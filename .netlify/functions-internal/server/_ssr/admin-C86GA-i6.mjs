@@ -2,9 +2,9 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as useNavigate, f as Outlet, g as Link, l as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as useAuth } from "./router-DeIq3Xch.mjs";
+import { n as useAuth } from "./router-lUv0QgBp.mjs";
 import { _ as Building2, a as Search, c as LogOut, g as Calendar, n as User, o as Phone, s as Mail, v as Briefcase } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/admin-gXxdsmLz.js
+//#region node_modules/.nitro/vite/services/ssr/assets/admin-C86GA-i6.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AdminPage() {

@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { b as ArrowRight, d as Headphones, f as Flame, h as ChevronDown, i as ShieldCheck, l as Lock, m as CircleCheck, p as ClipboardCheck, r as TriangleAlert, t as X, u as LoaderCircle, y as Ban } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DPBnBkUn.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CdRZdKdi.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -421,15 +421,7 @@ function RegistrationSection() {
 						"Content-Type": "application/json",
 						Authorization: `Bearer ${supabaseAnonKey}`
 					},
-					body: JSON.stringify({
-						email: registrationData.email,
-						company_name: registrationData.company_name,
-						contact_person: registrationData.contact_person,
-						designation: registrationData.designation,
-						mobile_number: registrationData.mobile_number,
-						building_type: registrationData.building_type,
-						building_type_other: registrationData.building_type_other
-					})
+					body: JSON.stringify({ razorpay_payment_id: response.razorpay_payment_id })
 				});
 			} catch {
 				console.warn("Confirmation email failed to send, but registration was saved.");
