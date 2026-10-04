@@ -111,7 +111,7 @@ function buildEmailHtml(data: RegistrationData): string {
                 </ul>
 
                 <p class="email-question" style="margin:0 0 32px;font-size:21px;line-height:1.6;color:#555555;">If you have any questions in the meantime, feel free to reach us at</p>
-                <p class="email-signoff" style="margin:0;font-size:21px;line-height:1.6;color:#555555;">Best Regards,<br /><strong>Team MAHA BINU Fire Fighters</strong></p>
+                <p class="email-signoff" style="margin:0;font-size:21px;line-height:1.6;color:#555555;">Warm Regards,<br /><strong>TEAM MAHA BINU FIRE FIGHTERS</strong></p>
                 <p class="email-contact" style="margin:36px 0 0;font-size:18px;line-height:1.7;color:#555555;">Contact: Arun<br />Number: +91 4423780609</p>
               </td>
             </tr>
