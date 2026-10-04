@@ -6,6 +6,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
 };
 
+const EXPECTED_AMOUNT_PAISE = 9900;
+const EXPECTED_CURRENCY = "INR";
+
 type RegistrationData = {
   email: string;
   company_name: string;
@@ -21,6 +24,15 @@ type VerifyRequest = {
   razorpay_payment_id: string;
   razorpay_signature: string;
   registration: RegistrationData;
+};
+
+type RazorpayPayment = {
+  id: string;
+  order_id: string | null;
+  amount: number;
+  currency: string;
+  status: string;
+  method: string;
 };
 
 async function verifySignature(
@@ -44,6 +56,27 @@ async function verifySignature(
   return expected === signature;
 }
 
+async function fetchRazorpayPayment(
+  paymentId: string,
+  keyId: string,
+  keySecret: string,
+): Promise<RazorpayPayment | null> {
+  const auth = btoa(`${keyId}:${keySecret}`);
+  const response = await fetch(`https://api.razorpay.com/v1/payments/${paymentId}`, {
+    method: "GET",
+    headers: {
+      "Authorization": `Basic ${auth}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  return await response.json() as RazorpayPayment;
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 200, headers: corsHeaders });
@@ -57,8 +90,10 @@ Deno.serve(async (req: Request) => {
       });
     }
 
+    const keyId = Deno.env.get("RAZORPAY_KEY_ID");
     const keySecret = Deno.env.get("RAZORPAY_KEY_SECRET");
-    if (!keySecret) {
+
+    if (!keyId || !keySecret) {
       return new Response(JSON.stringify({ error: "Razorpay credentials not configured" }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -82,15 +117,57 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const isValid = await verifySignature(
+    // Step 1: Verify the HMAC signature (proves the payment response came from Razorpay)
+    const isSignatureValid = await verifySignature(
       razorpay_order_id,
       razorpay_payment_id,
       razorpay_signature,
       keySecret,
     );
 
-    if (!isValid) {
+    if (!isSignatureValid) {
       return new Response(JSON.stringify({ error: "Payment signature verification failed" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // Step 2: Fetch the payment from Razorpay's server API to independently verify
+    // the payment exists, belongs to the expected order, is for the correct amount
+    // and currency, and has been captured. This prevents a valid signature from
+    // being paired with a payment that doesn't meet our requirements.
+    const payment = await fetchRazorpayPayment(razorpay_payment_id, keyId, keySecret);
+
+    if (!payment) {
+      return new Response(JSON.stringify({ error: "Unable to verify payment with Razorpay." }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (payment.order_id !== razorpay_order_id) {
+      return new Response(JSON.stringify({ error: "Payment does not match the expected order." }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (payment.amount !== EXPECTED_AMOUNT_PAISE) {
+      return new Response(JSON.stringify({ error: "Payment amount does not match the required fee." }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (payment.currency !== EXPECTED_CURRENCY) {
+      return new Response(JSON.stringify({ error: "Payment currency does not match." }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (payment.status !== "captured") {
+      return new Response(JSON.stringify({ error: "Payment has not been captured. Please complete the payment." }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -134,7 +211,7 @@ Deno.serve(async (req: Request) => {
       }
       if (rpcError.code === "23505") {
         return new Response(
-          JSON.stringify({ error: "This email has already been registered." }),
+          JSON.stringify({ error: "This email or payment has already been registered." }),
           {
             status: 409,
             headers: { ...corsHeaders, "Content-Type": "application/json" },
