@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { b as ArrowRight, d as Headphones, f as Flame, h as ChevronDown, i as ShieldCheck, m as CircleCheck, p as ClipboardCheck, r as TriangleAlert, t as X, u as LoaderCircle, y as Ban } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-BDNuIPkw.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-5ztylqB5.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -249,6 +249,20 @@ function QuoteBanner() {
 		})
 	});
 }
+function FieldLabel({ children }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+		className: "mb-2 block font-label text-[13px] font-bold text-foreground",
+		children: [
+			children,
+			" ",
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "text-primary",
+				children: "*"
+			})
+		]
+	});
+}
+var inputClass = "w-full rounded-md border-2 border-input bg-card px-4 py-3 font-sans text-base text-foreground placeholder:text-on-surface-variant/60 outline-none transition-colors focus:border-secondary";
 var initialState = {
 	company_name: "",
 	contact_person: "",

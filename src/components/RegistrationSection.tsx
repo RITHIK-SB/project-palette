@@ -3,6 +3,17 @@ import { useState, type FormEvent, type ReactNode } from "react";
 import { type RegistrationInput } from "@/lib/supabase";
 import { useRemainingSpots } from "@/hooks/use-remaining-spots";
 
+function FieldLabel({ children }: { children: ReactNode }) {
+  return (
+    <label className="mb-2 block font-label text-[13px] font-bold text-foreground">
+      {children} <span className="text-primary">*</span>
+    </label>
+  );
+}
+
+const inputClass =
+  "w-full rounded-md border-2 border-input bg-card px-4 py-3 font-sans text-base text-foreground placeholder:text-on-surface-variant/60 outline-none transition-colors focus:border-secondary";
+
 type FormState = {
   company_name: string;
   contact_person: string;
