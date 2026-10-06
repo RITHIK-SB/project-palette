@@ -27,7 +27,8 @@ type RegistrationData = {
 };
 
 type EmailRequest = {
-  razorpay_payment_id: string;
+  razorpay_payment_id?: string;
+  registration_id?: string;
 };
 
 function buildEmailHtml(data: RegistrationData): string {
@@ -171,10 +172,10 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const { razorpay_payment_id } = await req.json() as EmailRequest;
+    const { razorpay_payment_id, registration_id } = await req.json() as EmailRequest;
 
-    if (!razorpay_payment_id) {
-      return new Response(JSON.stringify({ error: "Payment ID is required" }), {
+    if (!razorpay_payment_id && !registration_id) {
+      return new Response(JSON.stringify({ error: "Payment ID or registration ID is required" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -191,12 +192,13 @@ Deno.serve(async (req: Request) => {
 
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
-    // Look up the registration by its Razorpay payment ID and verify it was paid.
-    // This prevents sending emails for nonexistent, unpaid, or unverified registrations.
+    // Look up the registration by its Razorpay payment ID or registration ID.
+    // The razorpay_payment_verified flag is set to true by try_claim_registration_slot
+    // for all registrations (paid and free), confirming the row was created server-side.
     const { data: registration, error: dbError } = await supabase
       .from("registrations")
       .select("email, company_name, contact_person, designation, mobile_number, building_type, building_type_other, razorpay_payment_verified")
-      .eq("razorpay_payment_id", razorpay_payment_id)
+      .eq(registration_id ? "id" : "razorpay_payment_id", registration_id ?? razorpay_payment_id)
       .maybeSingle();
 
     if (dbError) {

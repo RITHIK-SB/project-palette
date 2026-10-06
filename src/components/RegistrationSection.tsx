@@ -1,49 +1,7 @@
-import { TriangleAlert, ClipboardCheck, Lock, ChevronDown, CheckCircle2, Loader2, Ban } from "lucide-react";
+import { TriangleAlert, ClipboardCheck, ChevronDown, CheckCircle2, Loader2, Ban } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { type RegistrationInput } from "@/lib/supabase";
 import { useRemainingSpots } from "@/hooks/use-remaining-spots";
-
-declare global {
-  interface Window {
-    Razorpay?: new (options: RazorpayOptions) => RazorpayInstance;
-  }
-}
-
-type RazorpayOptions = {
-  key: string;
-  amount: number;
-  currency: string;
-  order_id: string;
-  name: string;
-  description: string;
-  prefill: { name: string; email: string; contact: string };
-  theme: { color: string };
-  handler: (response: RazorpayResponse) => void;
-  modal: {
-    ondismiss: () => void;
-  };
-};
-
-type RazorpayResponse = {
-  razorpay_order_id: string;
-  razorpay_payment_id: string;
-  razorpay_signature: string;
-};
-
-type RazorpayInstance = {
-  open: () => void;
-};
-
-function FieldLabel({ children }: { children: ReactNode }) {
-  return (
-    <label className="mb-2 block font-label text-[13px] font-bold text-foreground">
-      {children} <span className="text-primary">*</span>
-    </label>
-  );
-}
-
-const inputClass =
-  "w-full rounded-md border-2 border-input bg-card px-4 py-3 font-sans text-base text-foreground placeholder:text-on-surface-variant/60 outline-none transition-colors focus:border-secondary";
 
 type FormState = {
   company_name: string;
@@ -66,20 +24,6 @@ const initialState: FormState = {
 };
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
-
-const RAZORPAY_SCRIPT_URL = "https://checkout.razorpay.com/v1/checkout.js";
-
-function loadRazorpayScript(): Promise<void> {
-  if (window.Razorpay) return Promise.resolve();
-  return new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = RAZORPAY_SCRIPT_URL;
-    script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Failed to load Razorpay checkout script"));
-    document.head.appendChild(script);
-  });
-}
 
 export function RegistrationSection() {
   const [form, setForm] = useState<FormState>(initialState);
@@ -133,115 +77,31 @@ export function RegistrationSection() {
       building_type_other: form.building_type === "other" ? form.building_type_other.trim() : null,
     };
 
-    try {
-      await loadRazorpayScript();
-    } catch {
-      setStatus("error");
-      setMessage("Failed to load payment checkout. Please check your internet connection and try again.");
-      return;
-    }
-
-    if (!window.Razorpay) {
-      setStatus("error");
-      setMessage("Payment checkout failed to initialize. Please try again.");
-      return;
-    }
-
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
 
-    let orderData: { order_id: string; amount: number; currency: string; key_id: string };
-
     try {
-      const orderResponse = await fetch(`${supabaseUrl}/functions/v1/create-razorpay-order`, {
+      const submitResponse = await fetch(`${supabaseUrl}/functions/v1/submit-free-registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${supabaseAnonKey}`,
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify({ registration: registrationData }),
       });
 
-      if (!orderResponse.ok) {
-        const errorBody = await orderResponse.json().catch(() => ({}));
+      if (!submitResponse.ok) {
+        const errorBody = await submitResponse.json().catch(() => ({}));
         setStatus("error");
-        if (orderResponse.status === 409) {
+        if (submitResponse.status === 409) {
           setMessage(errorBody.error ?? "All 99 registration spots have been claimed.");
         } else {
-          setMessage("Failed to initiate payment. Please try again.");
+          setMessage(errorBody.error ?? "Registration failed. Please try again.");
         }
         return;
       }
 
-      orderData = await orderResponse.json();
-    } catch {
-      setStatus("error");
-      setMessage("Network error while creating payment order. Please try again.");
-      return;
-    }
-
-    const rzp = new window.Razorpay({
-      key: orderData.key_id,
-      amount: orderData.amount,
-      currency: orderData.currency,
-      order_id: orderData.order_id,
-      name: "MAHA BINU Fire Fighters",
-      description: "Synergy 2026 Expo Registration",
-      prefill: {
-        name: registrationData.contact_person,
-        email: registrationData.email,
-        contact: registrationData.mobile_number,
-      },
-      theme: { color: "#c51d1d" },
-      handler: (response: RazorpayResponse) => {
-        verifyAndComplete(
-          response,
-          registrationData,
-          supabaseUrl,
-          supabaseAnonKey,
-        );
-      },
-      modal: {
-        ondismiss: () => {
-          setStatus("error");
-          setMessage("Payment cancelled. You can try again when ready.");
-        },
-      },
-    });
-
-    rzp.open();
-  };
-
-  const verifyAndComplete = async (
-    response: RazorpayResponse,
-    registrationData: RegistrationInput,
-    supabaseUrl: string,
-    supabaseAnonKey: string,
-  ) => {
-    setStatus("loading");
-    setMessage("");
-
-    try {
-      const verifyResponse = await fetch(`${supabaseUrl}/functions/v1/verify-razorpay-payment`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${supabaseAnonKey}`,
-        },
-        body: JSON.stringify({
-          razorpay_order_id: response.razorpay_order_id,
-          razorpay_payment_id: response.razorpay_payment_id,
-          razorpay_signature: response.razorpay_signature,
-          registration: registrationData,
-        }),
-      });
-
-      if (!verifyResponse.ok) {
-        const errorBody = await verifyResponse.json().catch(() => ({}));
-        setStatus("error");
-        setMessage(errorBody.error ?? "Payment verification failed. Please contact us if you were charged.");
-        return;
-      }
+      const responseData = await submitResponse.json();
 
       setStatus("success");
       setMessage("Registration successful! Our engineering team will contact you shortly.");
@@ -255,7 +115,7 @@ export function RegistrationSection() {
             Authorization: `Bearer ${supabaseAnonKey}`,
           },
           body: JSON.stringify({
-            razorpay_payment_id: response.razorpay_payment_id,
+            registration_id: responseData.registration_id,
           }),
         });
       } catch {
@@ -263,7 +123,7 @@ export function RegistrationSection() {
       }
     } catch {
       setStatus("error");
-      setMessage("Network error during payment verification. Please contact us if you were charged.");
+      setMessage("Network error during registration. Please try again.");
     }
   };
 
@@ -443,15 +303,10 @@ export function RegistrationSection() {
                 ) : (
                   <>
                     <ClipboardCheck className="h-5 w-5" />
-                    Register & Pay ₹99
+                    Submit Registration
                   </>
                 )}
               </button>
-
-              <p className="flex items-center justify-center gap-2 font-sans text-sm text-on-surface-variant">
-                <Lock className="h-4 w-4" />
-                Secure payment via Razorpay
-              </p>
             </form>
           )}
         </div>

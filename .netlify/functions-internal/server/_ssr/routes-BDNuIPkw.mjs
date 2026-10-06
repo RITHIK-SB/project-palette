@@ -1,8 +1,8 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-import { b as ArrowRight, d as Headphones, f as Flame, h as ChevronDown, i as ShieldCheck, l as Lock, m as CircleCheck, p as ClipboardCheck, r as TriangleAlert, t as X, u as LoaderCircle, y as Ban } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CdRZdKdi.js
+import { b as ArrowRight, d as Headphones, f as Flame, h as ChevronDown, i as ShieldCheck, m as CircleCheck, p as ClipboardCheck, r as TriangleAlert, t as X, u as LoaderCircle, y as Ban } from "../_libs/lucide-react.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BDNuIPkw.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -249,20 +249,6 @@ function QuoteBanner() {
 		})
 	});
 }
-function FieldLabel({ children }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-		className: "mb-2 block font-label text-[13px] font-bold text-foreground",
-		children: [
-			children,
-			" ",
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "text-primary",
-				children: "*"
-			})
-		]
-	});
-}
-var inputClass = "w-full rounded-md border-2 border-input bg-card px-4 py-3 font-sans text-base text-foreground placeholder:text-on-surface-variant/60 outline-none transition-colors focus:border-secondary";
 var initialState = {
 	company_name: "",
 	contact_person: "",
@@ -272,18 +258,6 @@ var initialState = {
 	building_type: "",
 	building_type_other: ""
 };
-var RAZORPAY_SCRIPT_URL = "https://checkout.razorpay.com/v1/checkout.js";
-function loadRazorpayScript() {
-	if (window.Razorpay) return Promise.resolve();
-	return new Promise((resolve, reject) => {
-		const script = document.createElement("script");
-		script.src = RAZORPAY_SCRIPT_URL;
-		script.async = true;
-		script.onload = () => resolve();
-		script.onerror = () => reject(/* @__PURE__ */ new Error("Failed to load Razorpay checkout script"));
-		document.head.appendChild(script);
-	});
-}
 function RegistrationSection() {
 	const [form, setForm] = (0, import_react.useState)(initialState);
 	const [status, setStatus] = (0, import_react.useState)("idle");
@@ -329,88 +303,25 @@ function RegistrationSection() {
 			building_type: form.building_type,
 			building_type_other: form.building_type === "other" ? form.building_type_other.trim() : null
 		};
-		try {
-			await loadRazorpayScript();
-		} catch {
-			setStatus("error");
-			setMessage("Failed to load payment checkout. Please check your internet connection and try again.");
-			return;
-		}
-		if (!window.Razorpay) {
-			setStatus("error");
-			setMessage("Payment checkout failed to initialize. Please try again.");
-			return;
-		}
 		const supabaseUrl = "https://ykwauaijddycdchcibex.supabase.co";
 		const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlrd2F1YWlqZGR5Y2RjaGNpYmV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NjI1NzksImV4cCI6MjEwNDUzODU3OX0.w2lb6rxg_pripaBSlT-ruYKwrRZG2jrX-8e-fLvgaXA";
-		let orderData;
 		try {
-			const orderResponse = await fetch(`${supabaseUrl}/functions/v1/create-razorpay-order`, {
+			const submitResponse = await fetch(`${supabaseUrl}/functions/v1/submit-free-registration`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${supabaseAnonKey}`
 				},
-				body: JSON.stringify({})
+				body: JSON.stringify({ registration: registrationData })
 			});
-			if (!orderResponse.ok) {
-				const errorBody = await orderResponse.json().catch(() => ({}));
+			if (!submitResponse.ok) {
+				const errorBody = await submitResponse.json().catch(() => ({}));
 				setStatus("error");
-				if (orderResponse.status === 409) setMessage(errorBody.error ?? "All 99 registration spots have been claimed.");
-				else setMessage("Failed to initiate payment. Please try again.");
+				if (submitResponse.status === 409) setMessage(errorBody.error ?? "All 99 registration spots have been claimed.");
+				else setMessage(errorBody.error ?? "Registration failed. Please try again.");
 				return;
 			}
-			orderData = await orderResponse.json();
-		} catch {
-			setStatus("error");
-			setMessage("Network error while creating payment order. Please try again.");
-			return;
-		}
-		new window.Razorpay({
-			key: orderData.key_id,
-			amount: orderData.amount,
-			currency: orderData.currency,
-			order_id: orderData.order_id,
-			name: "MAHA BINU Fire Fighters",
-			description: "Synergy 2026 Expo Registration",
-			prefill: {
-				name: registrationData.contact_person,
-				email: registrationData.email,
-				contact: registrationData.mobile_number
-			},
-			theme: { color: "#c51d1d" },
-			handler: (response) => {
-				verifyAndComplete(response, registrationData, supabaseUrl, supabaseAnonKey);
-			},
-			modal: { ondismiss: () => {
-				setStatus("error");
-				setMessage("Payment cancelled. You can try again when ready.");
-			} }
-		}).open();
-	};
-	const verifyAndComplete = async (response, registrationData, supabaseUrl, supabaseAnonKey) => {
-		setStatus("loading");
-		setMessage("");
-		try {
-			const verifyResponse = await fetch(`${supabaseUrl}/functions/v1/verify-razorpay-payment`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${supabaseAnonKey}`
-				},
-				body: JSON.stringify({
-					razorpay_order_id: response.razorpay_order_id,
-					razorpay_payment_id: response.razorpay_payment_id,
-					razorpay_signature: response.razorpay_signature,
-					registration: registrationData
-				})
-			});
-			if (!verifyResponse.ok) {
-				const errorBody = await verifyResponse.json().catch(() => ({}));
-				setStatus("error");
-				setMessage(errorBody.error ?? "Payment verification failed. Please contact us if you were charged.");
-				return;
-			}
+			const responseData = await submitResponse.json();
 			setStatus("success");
 			setMessage("Registration successful! Our engineering team will contact you shortly.");
 			setForm(initialState);
@@ -421,14 +332,14 @@ function RegistrationSection() {
 						"Content-Type": "application/json",
 						Authorization: `Bearer ${supabaseAnonKey}`
 					},
-					body: JSON.stringify({ razorpay_payment_id: response.razorpay_payment_id })
+					body: JSON.stringify({ registration_id: responseData.registration_id })
 				});
 			} catch {
 				console.warn("Confirmation email failed to send, but registration was saved.");
 			}
 		} catch {
 			setStatus("error");
-			setMessage("Network error during payment verification. Please contact us if you were charged.");
+			setMessage("Network error during registration. Please try again.");
 		}
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
@@ -621,11 +532,7 @@ function RegistrationSection() {
 							"data-tour": "payment",
 							disabled: status === "loading",
 							className: "mt-2 inline-flex items-center justify-center gap-3 rounded-md bg-primary px-6 py-4 font-sans text-lg font-bold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60",
-							children: status === "loading" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-5 w-5 animate-spin" }), "Processing..."] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClipboardCheck, { className: "h-5 w-5" }), "Register & Pay ₹99"] })
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-							className: "flex items-center justify-center gap-2 font-sans text-sm text-on-surface-variant",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, { className: "h-4 w-4" }), "Secure payment via Razorpay"]
+							children: status === "loading" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-5 w-5 animate-spin" }), "Processing..."] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClipboardCheck, { className: "h-5 w-5" }), "Submit Registration"] })
 						})
 					]
 				})]

@@ -6,3 +6,6 @@ verify_jwt = true
 
 [functions.verify-razorpay-payment]
 verify_jwt = true
+
+[functions.submit-free-registration]
+verify_jwt = true
