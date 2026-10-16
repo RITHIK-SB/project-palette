@@ -382,7 +382,7 @@ function RegistrationSection() {
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "mt-2 text-pretty font-sans text-[15px] leading-relaxed text-on-surface-variant",
-							children: "Registration closes strictly at the conclusion of the Expo 2026 event on October 10th. Late submissions will not qualify for the inspection."
+							children: "Registration closes strictly at the conclusion of the Expo 2026 event on October 17th. Late submissions will not qualify for the inspection."
 						})]
 					})
 				]
