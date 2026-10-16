@@ -25,7 +25,7 @@ const steps: TourStep[] = [
   {
     target: "payment",
     title: "Payment",
-    description: "Complete your registration securely through Razorpay.",
+    description: "Complete your registration here.",
   },
   {
     target: "status",
