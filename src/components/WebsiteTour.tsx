@@ -24,7 +24,7 @@ const steps: TourStep[] = [
   },
   {
     target: "payment",
-    title: "Payment",
+    title: "Form",
     description: "Complete your registration here.",
   },
   {
