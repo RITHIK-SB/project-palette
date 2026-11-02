@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { b as ArrowRight, d as Headphones, f as Flame, h as ChevronDown, i as ShieldCheck, m as CircleCheck, p as ClipboardCheck, r as TriangleAlert, t as X, u as LoaderCircle, y as Ban } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-wEhcNqQ-.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-C2D9xEWH.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -276,6 +276,9 @@ function RegistrationSection() {
 	const [form, setForm] = (0, import_react.useState)(initialState);
 	const [status, setStatus] = (0, import_react.useState)("idle");
 	const [message, setMessage] = (0, import_react.useState)("");
+	const [turnstileToken, setTurnstileToken] = (0, import_react.useState)("");
+	const [widgetKey, setWidgetKey] = (0, import_react.useState)(0);
+	const turnstileSiteKey = void 0;
 	const isOther = form.building_type === "other";
 	const { isFull, MAX_REGISTRATIONS } = useRemainingSpots();
 	const update = (field, value) => {
@@ -308,6 +311,11 @@ function RegistrationSection() {
 			setMessage("Please specify your building type.");
 			return;
 		}
+		if (!turnstileToken) {
+			setStatus("error");
+			setMessage("Please complete the security check.");
+			return;
+		}
 		const registrationData = {
 			company_name: form.company_name.trim(),
 			contact_person: form.contact_person.trim(),
@@ -326,11 +334,16 @@ function RegistrationSection() {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${supabaseAnonKey}`
 				},
-				body: JSON.stringify({ registration: registrationData })
+				body: JSON.stringify({
+					registration: registrationData,
+					turnstile_token: turnstileToken
+				})
 			});
 			if (!submitResponse.ok) {
 				const errorBody = await submitResponse.json().catch(() => ({}));
 				setStatus("error");
+				setTurnstileToken("");
+				setWidgetKey((key) => key + 1);
 				if (submitResponse.status === 409) setMessage(errorBody.error ?? "All 99 registration spots have been claimed.");
 				else setMessage(errorBody.error ?? "Registration failed. Please try again.");
 				return;
@@ -353,6 +366,8 @@ function RegistrationSection() {
 			}
 		} catch {
 			setStatus("error");
+			setTurnstileToken("");
+			setWidgetKey((key) => key + 1);
 			setMessage("Network error during registration. Please try again.");
 		}
 	};
@@ -534,6 +549,7 @@ function RegistrationSection() {
 								disabled: status === "loading"
 							})
 						] }),
+						turnstileSiteKey,
 						status === "error" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 p-3",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TriangleAlert, { className: "h-5 w-5 shrink-0 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {

@@ -2,6 +2,7 @@ import { TriangleAlert, ClipboardCheck, ChevronDown, CheckCircle2, Loader2, Ban 
 import { useState, type FormEvent, type ReactNode } from "react";
 import { type RegistrationInput } from "@/lib/supabase";
 import { useRemainingSpots } from "@/hooks/use-remaining-spots";
+import { TurnstileWidget } from "@/components/TurnstileWidget";
 
 function FieldLabel({ children }: { children: ReactNode }) {
   return (
@@ -40,6 +41,9 @@ export function RegistrationSection() {
   const [form, setForm] = useState<FormState>(initialState);
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [message, setMessage] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [widgetKey, setWidgetKey] = useState(0);
+  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
   const isOther = form.building_type === "other";
   const { isFull, MAX_REGISTRATIONS } = useRemainingSpots();
 
@@ -78,6 +82,12 @@ export function RegistrationSection() {
       return;
     }
 
+    if (!turnstileToken) {
+      setStatus("error");
+      setMessage("Please complete the security check.");
+      return;
+    }
+
     const registrationData: RegistrationInput = {
       company_name: form.company_name.trim(),
       contact_person: form.contact_person.trim(),
@@ -98,12 +108,14 @@ export function RegistrationSection() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${supabaseAnonKey}`,
         },
-        body: JSON.stringify({ registration: registrationData }),
+        body: JSON.stringify({ registration: registrationData, turnstile_token: turnstileToken }),
       });
 
       if (!submitResponse.ok) {
         const errorBody = await submitResponse.json().catch(() => ({}));
         setStatus("error");
+        setTurnstileToken("");
+        setWidgetKey((key) => key + 1);
         if (submitResponse.status === 409) {
           setMessage(errorBody.error ?? "All 99 registration spots have been claimed.");
         } else {
@@ -134,6 +146,8 @@ export function RegistrationSection() {
       }
     } catch {
       setStatus("error");
+      setTurnstileToken("");
+      setWidgetKey((key) => key + 1);
       setMessage("Network error during registration. Please try again.");
     }
   };
@@ -292,6 +306,14 @@ export function RegistrationSection() {
                   />
                 )}
               </div>
+
+              {turnstileSiteKey && (
+                <TurnstileWidget
+                  key={widgetKey}
+                  siteKey={turnstileSiteKey}
+                  onTokenChange={setTurnstileToken}
+                />
+              )}
 
               {status === "error" && (
                 <div className="flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 p-3">
