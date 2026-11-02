@@ -2,6 +2,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { createHandler } from "./handler.ts";
 import { verifyTurnstileToken } from "./turnstile.ts";
 
+// Without TURNSTILE_SECRET_KEY, readConfig returns null and every request fails closed with 500.
 Deno.serve(
   createHandler({
     readConfig: () => {

@@ -1,0 +1,21 @@
+{
+  "projectId": "70809999",
+  "functions": {
+    "create-razorpay-order": {
+      "hasChanged": false,
+      "hash": "f02b3ef922ac0dce9cd29f345b8511f98e12eeca7caac0f6252c3ef3cca9ff62"
+    },
+    "send-registration-email": {
+      "hasChanged": false,
+      "hash": "4c287a84d2ce3fdf4c34b92ef0785c12acedae8d35885e4502092667804e947e"
+    },
+    "submit-free-registration": {
+      "hasChanged": false,
+      "hash": "3a6a5af6503262cc46f1f24d2f5df60fda1c89ff1e9b96f178e5892a28038310"
+    },
+    "verify-razorpay-payment": {
+      "hasChanged": false,
+      "hash": "bd99934a24b29aa89418e3fabd908d9271bdff4aefdf9dede876fd13f5358da8"
+    }
+  }
+}
