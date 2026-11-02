@@ -3,6 +3,7 @@ import { createHandler } from "./handler.ts";
 import { verifyTurnstileToken } from "./turnstile.ts";
 
 // Without TURNSTILE_SECRET_KEY, readConfig returns null and every request fails closed with 500.
+console.log("submit-free-registration: handler with Turnstile and rate limiting loaded");
 Deno.serve(
   createHandler({
     readConfig: () => {
