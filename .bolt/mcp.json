@@ -4,7 +4,7 @@
       "enabled": true
     },
     "graphify": {
-      "enabled": false
+      "enabled": true
     }
   }
 }
