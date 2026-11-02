@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-CsUR5_iZ.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { b as ArrowRight, d as Headphones, f as Flame, h as ChevronDown, i as ShieldCheck, m as CircleCheck, p as ClipboardCheck, r as TriangleAlert, t as X, u as LoaderCircle, y as Ban } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-C2D9xEWH.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CoIL5RUe.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var navItems = [{
@@ -249,6 +249,50 @@ function QuoteBanner() {
 		})
 	});
 }
+var TURNSTILE_SCRIPT_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+var scriptPromise = null;
+function loadTurnstileScript() {
+	if (window.turnstile) return Promise.resolve();
+	if (!scriptPromise) scriptPromise = new Promise((resolve, reject) => {
+		const script = document.createElement("script");
+		script.src = TURNSTILE_SCRIPT_SRC;
+		script.async = true;
+		script.onload = () => resolve();
+		script.onerror = () => {
+			script.remove();
+			scriptPromise = null;
+			reject(/* @__PURE__ */ new Error("Turnstile failed to load"));
+		};
+		document.head.appendChild(script);
+	});
+	return scriptPromise;
+}
+function TurnstileWidget({ siteKey, onTokenChange }) {
+	const containerRef = (0, import_react.useRef)(null);
+	(0, import_react.useEffect)(() => {
+		let widgetId = null;
+		let cancelled = false;
+		const container = containerRef.current;
+		loadTurnstileScript().then(() => {
+			if (cancelled || !container || !window.turnstile) return;
+			widgetId = window.turnstile.render(container, {
+				sitekey: siteKey,
+				callback: (token) => onTokenChange(token),
+				"expired-callback": () => onTokenChange(""),
+				"error-callback": () => onTokenChange("")
+			});
+		}).catch(() => onTokenChange(""));
+		return () => {
+			cancelled = true;
+			if (widgetId && window.turnstile) window.turnstile.remove(widgetId);
+			onTokenChange("");
+		};
+	}, [siteKey, onTokenChange]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		ref: containerRef,
+		className: "flex min-h-[65px] justify-center"
+	});
+}
 function FieldLabel({ children }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
 		className: "mb-2 block font-label text-[13px] font-bold text-foreground",
@@ -278,7 +322,7 @@ function RegistrationSection() {
 	const [message, setMessage] = (0, import_react.useState)("");
 	const [turnstileToken, setTurnstileToken] = (0, import_react.useState)("");
 	const [widgetKey, setWidgetKey] = (0, import_react.useState)(0);
-	const turnstileSiteKey = void 0;
+	const turnstileSiteKey = "0x4AAAAAAFw1J1__rwSJCkKo";
 	const isOther = form.building_type === "other";
 	const { isFull, MAX_REGISTRATIONS } = useRemainingSpots();
 	const update = (field, value) => {
@@ -549,7 +593,10 @@ function RegistrationSection() {
 								disabled: status === "loading"
 							})
 						] }),
-						turnstileSiteKey,
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TurnstileWidget, {
+							siteKey: turnstileSiteKey,
+							onTokenChange: setTurnstileToken
+						}, widgetKey),
 						status === "error" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 p-3",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TriangleAlert, { className: "h-5 w-5 shrink-0 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
